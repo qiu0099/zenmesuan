@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html data-page-node-id="KthUJHhoxAt2KIfRzEcXUj" lang="zh-CN">
-<head data-page-node-id="54Lu0OGzjPrc0nkW4kKNIZ">
-<script data-page-node-id="gUIR4CImpOjyy7gzPdl8ZQ" src="/page/page_comm/inject.js"></script>
-<meta data-page-node-id="vn5swH0i8DSpGS5HDLe5Hi" charset="UTF-8">
-<meta data-page-node-id="iHQG96KQIq9cmlgQ4tL0Ke" content="width=device-width, initial-scale=1.0" name="viewport">
-<title data-page-node-id="sVRw8SuNlJ7wq5mnIH41Z5" data-pnid-children="uE8m1j9MlQOnNdnKd7cVo5">小生意成本计算器</title>
-<style data-page-node-id="SdKRNpBvk3pwtHDJdXCyvL" data-pnid-children="GSF0JFVRJjJshzZeSjZh0X">
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>小生意成本计算器</title>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6ef46246512cf939e616fdb063a759b4";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<style>
   :root {
     --bg: #f6f7f9;
     --panel: #ffffff;
@@ -137,146 +145,146 @@
   .tout .row .v { font-weight: 700; }
 </style>
 </head>
-<body data-page-node-id="y0FC3J5dqCpgljQ2Mn2Ugv">
+<body>
 
-<header data-page-node-id="sbIdHNW3j6SajNU0zr5WmV">
-  <div data-page-node-id="5ytayLCEsgBomEKPd0cNdY" class="wrap">
-    <h1 data-page-node-id="8OA9Lq3A3JCAnu2xJnvh4i"><!--pnid:9HSV4qzKvX6gwZHIMKkvzW-->小生意成本计算器</h1>
-    <p data-page-node-id="uswuKdNgC0UrEb5efwGptI"><!--pnid:Ih80XVMXJyWvdbyZ01hUt9-->算清固定成本、变动成本、盈亏平衡点和回本周期 —— 开店之前，先算后干</p>
+<header>
+  <div class="wrap">
+    <h1>小生意成本计算器</h1>
+    <p>算清固定成本、变动成本、盈亏平衡点和回本周期 —— 开店之前，先算后干</p>
   </div>
 </header>
 
-<div data-page-node-id="02csxonx6aTYulI8OJib7f" class="container">
+<div class="container">
 
-  <!--pnid:VzlduIaMXgZ0AXIC9nRlSQ--><!-- 左侧输入 -->
-  <div data-page-node-id="xCl1CadwkugahCggDDJ6qC" class="card">
-    <h2 data-page-node-id="AxJYsDkg2QISmSzfu8e8Hp"><span data-page-node-id="3DSNc7PP8mFYbomL6sChEJ" class="dot"></span><!--pnid:ub40wwOvRGqgb0ocaK5t11-->输入你的生意数据</h2>
+  <!-- 左侧输入 -->
+  <div class="card">
+    <h2><span class="dot"></span>输入你的生意数据</h2>
 
-    <div data-page-node-id="r82NFh5OTWu9I1BR7OmhDQ" class="group">
-      <div data-page-node-id="bC1tVap03Yf87xqaAznLTH" class="group-title"><!--pnid:LObNFK6rxQyu3cmiQkmiTG-->① 初期投入（一次性）</div>
-      <div data-page-node-id="8Uon9Rqo1cXMLw37SihXo1" class="field"><label data-page-node-id="BICumznDNtgQfuDGBbty7U"><!--pnid:OID53dwqWNfLOXA6B1cn8N-->装修费用<span data-page-node-id="MHFO03KGLADVjDyTvkVhJk" class="unit"><!--pnid:DOWRlFFR2mK433hB4TmInP-->元</span></label><input data-page-node-id="2AAhixqVanRniR9J6CVWiX" id="renov" min="0" type="number" value="50000"></div>
-      <div data-page-node-id="o1In9QN9eLyyahVFbInLEW" class="field"><label data-page-node-id="77T5Vc5CKyA4xQELRUgn1K"><!--pnid:c4c0cfRf8WIlTRAOBgdaaZ-->设备 / 器具<span data-page-node-id="783eYMk1Y3M0fAK39a22Ep" class="unit"><!--pnid:HcIX3FnKLrqvmyulIWbS0z-->元</span></label><input data-page-node-id="QTvSHWqRSLhtDoFamOlZOZ" id="equip" min="0" type="number" value="30000"></div>
-      <div data-page-node-id="NRC39OYNMS1AtYZ7tmvXjD" class="field"><label data-page-node-id="kwPO3Xq2qd6xUEMxqZCk4V"><!--pnid:tFKvMXLy0v9xSSOSCibTkM-->押金 / 顶手费<span data-page-node-id="eJ87mXPIhBZ7ualjKDHjYN" class="unit"><!--pnid:d8WcKKS0W5YRjoKZZtDNiU-->元</span></label><input data-page-node-id="ZU14X98EHJNGWJnbfdKUMp" id="deposit" min="0" type="number" value="20000"></div>
-      <div data-page-node-id="5MN56QuIHgLimt4HxNGbtC" class="field"><label data-page-node-id="Dfn0ZVKKdJ6XuuVMsz0GMc"><!--pnid:hzZxf8ecevLPmq3nD1ldrw-->装修 / 设备摊销年限<span data-page-node-id="3PLeWHoNLb8Ko2zqLQJvEb" class="unit"><!--pnid:1F7wVoCiBpsNeOGBnCxvAg-->年</span></label><input data-page-node-id="RYaTaXWCaL0zH8FhgLYWyN" id="amortYears" min="1" step="0.5" type="number" value="3"></div>
+    <div class="group">
+      <div class="group-title">① 初期投入（一次性）</div>
+      <div class="field"><label>装修费用<span class="unit">元</span></label><input id="renov" min="0" type="number" value="50000"></div>
+      <div class="field"><label>设备 / 器具<span class="unit">元</span></label><input id="equip" min="0" type="number" value="30000"></div>
+      <div class="field"><label>押金 / 顶手费<span class="unit">元</span></label><input id="deposit" min="0" type="number" value="20000"></div>
+      <div class="field"><label>装修 / 设备摊销年限<span class="unit">年</span></label><input id="amortYears" min="1" step="0.5" type="number" value="3"></div>
     </div>
 
-    <div data-page-node-id="MAntsuOIWleEJ0fb28SybY" class="group">
-      <div data-page-node-id="7Lj2uxlEJQ0uvAja7kQ0jx" class="group-title"><!--pnid:11aMv2bHwO6JOL1dxlFcFR-->② 每月固定成本</div>
-      <div data-page-node-id="Mi5RhiqmSheUCmnYYH7Jv4" class="field"><label data-page-node-id="qz9T7gkw1k9Jk2ezsQ9NSw"><!--pnid:UXGNhe6Rf36UKaEAoeYoXr-->店铺租金<span data-page-node-id="JkqgljJkKaK9EzrKmhE63r" class="unit"><!--pnid:sn0r5xU4zbXbBWBOxJwl4W-->元/月</span></label><input data-page-node-id="wXOlLIYCHLGvRH8e7PKe5r" id="rent" min="0" type="number" value="6000"></div>
-      <div data-page-node-id="cq9ckfXrXhbkc4Iv9cnjic" class="field"><label data-page-node-id="3Cjp7M223kNXkFv5Ci0J1m"><!--pnid:CQZ49AUMAmq2BnhED3RdIh-->员工工资<span data-page-node-id="m4Ad5h7pjpcU6ktHOoasHK" class="unit"><!--pnid:xUnNLdevu4NZEHtyoFV3Il-->元/月</span></label><input data-page-node-id="MeMUsy7vE53Ay2gvyGwyu1" id="salary" min="0" type="number" value="8000"></div>
-      <div data-page-node-id="5wFVn7NSwFIbxx0xl0QVBG" class="field"><label data-page-node-id="H3fadhYxP3bkFrQj3FTfjO"><!--pnid:OuUtHspBgd5CShiJIvY89i-->水电物业网络<span data-page-node-id="tbCB21OGjbceNycAKxVMiS" class="unit"><!--pnid:FxKNuUO3MSAsPipOyoT0Km-->元/月</span></label><input data-page-node-id="WU4oarpXx0oc7OB2EZVW5Y" id="utility" min="0" type="number" value="1500"></div>
-      <div data-page-node-id="h89ykTXHqwvteOrFzuyqDe" class="field"><label data-page-node-id="FVd2bwclCy0wgvNCXUczti"><!--pnid:PnledJ2wkFsfhMrgTou7PT-->其他固定开支<span data-page-node-id="Z3G99WXu3dlznmSs0UCEPb" class="unit"><!--pnid:Yxypn7m5xqtfvH9iPMED5U-->元/月</span></label><input data-page-node-id="kosyBgnpR8kZhg6hv4uimF" id="otherFix" min="0" type="number" value="800"></div>
+    <div class="group">
+      <div class="group-title">② 每月固定成本</div>
+      <div class="field"><label>店铺租金<span class="unit">元/月</span></label><input id="rent" min="0" type="number" value="6000"></div>
+      <div class="field"><label>员工工资<span class="unit">元/月</span></label><input id="salary" min="0" type="number" value="8000"></div>
+      <div class="field"><label>水电物业网络<span class="unit">元/月</span></label><input id="utility" min="0" type="number" value="1500"></div>
+      <div class="field"><label>其他固定开支<span class="unit">元/月</span></label><input id="otherFix" min="0" type="number" value="800"></div>
     </div>
 
-    <div data-page-node-id="OFT8AMaLYjnP8lI0uUZINH" class="group">
-      <div data-page-node-id="fkvxNDFLJZxk8wBnYee4d7" class="group-title"><!--pnid:evCcfKRiMnSqfxXUUVpoJ9-->③ 单件变动成本</div>
-      <div data-page-node-id="PnZ2m1Am4wAFBV0sn4iXvJ" class="field"><label data-page-node-id="8vN1cNbJK895FdaL6mip2Z"><!--pnid:4FsbNxuTATraa5YpylVU42-->单件材料 / 进货成本<span data-page-node-id="PzyDI9RqOxojMIXZrp2To4" class="unit"><!--pnid:lS6LAYH2QCRMom4Fs6PqSo-->元</span></label><input data-page-node-id="5aQjPsB3me9F9aenLm3WKc" id="mat" min="0" step="0.1" type="number" value="8"></div>
-      <div data-page-node-id="IdKPsPkNaq5c7Cn0tX2mgu" class="field"><label data-page-node-id="Ujgp3VUWo5JCTX0b0ozVEd"><!--pnid:g0eBbFcc8yhPucYbqsZOuP-->单件包装 / 耗材<span data-page-node-id="k5TFWjrunF8JGH83b1pJZc" class="unit"><!--pnid:O7umfweuV0GpmM4LWHsGBt-->元</span></label><input data-page-node-id="sa2UBpAioUEZ89wuvroma7" id="pack" min="0" step="0.1" type="number" value="1"></div>
-      <div data-page-node-id="ofazG9bVqZBJNpbhyhFdyF" class="field"><label data-page-node-id="DXacfcGoq2Mj6FWEaayngw"><!--pnid:Jbi2mPO82pHovBkNSzofSm-->单件其他变动成本<span data-page-node-id="Cf7uHLzjOoxl6wzB87sWxb" class="unit"><!--pnid:0jUbJBJ4eF2h1xJkboRa26-->元</span></label><input data-page-node-id="uiThk8yvVYmTZ2dVQhpa0z" id="otherVar" min="0" step="0.1" type="number" value="0.5"></div>
+    <div class="group">
+      <div class="group-title">③ 单件变动成本</div>
+      <div class="field"><label>单件材料 / 进货成本<span class="unit">元</span></label><input id="mat" min="0" step="0.1" type="number" value="8"></div>
+      <div class="field"><label>单件包装 / 耗材<span class="unit">元</span></label><input id="pack" min="0" step="0.1" type="number" value="1"></div>
+      <div class="field"><label>单件其他变动成本<span class="unit">元</span></label><input id="otherVar" min="0" step="0.1" type="number" value="0.5"></div>
     </div>
 
-    <div data-page-node-id="e2kV2vnBBeUHkNSL5WIeGs" class="group">
-      <div data-page-node-id="NvdsZhGWYKRzTD9VnIDAD9" class="group-title"><!--pnid:sZV32dIGLGyfjnZWXOkZx6-->④ 定价与销量</div>
-      <div data-page-node-id="oQ1szgA2sKxOxT3Mbv7DYp" class="field"><label data-page-node-id="zStB8qFAUU9Z8Ei7mAqhYy"><!--pnid:YsaFldfsnodXLk0RcmKXmy-->单件售价<span data-page-node-id="RIRi6p836ehUAXA053mOVu" class="unit"><!--pnid:prlj5JykVcxl13LtaccLf4-->元</span></label><input data-page-node-id="JMtdiIwxg5yIDR0uk6vRTM" id="price" min="0" step="0.1" type="number" value="25"></div>
-      <div data-page-node-id="dJYX28qMNz3lltajoH7sfm" class="field"><label data-page-node-id="bXpJ2iM6wQoQs6pHWtTHFk"><!--pnid:JvNiS7dXPDQHFlG9GIbhjS-->预计日均销量<span data-page-node-id="4R8gStsxQcwebAD14C6jEs" class="unit"><!--pnid:hc840LFvvKgLHaJMCWqBdF-->件/天</span></label><input data-page-node-id="2y54o7RRVLWdylrvktxpyp" id="dailySales" min="0" type="number" value="80"></div>
-      <div data-page-node-id="uulrUQhVTJrclf9qFFjZAX" class="field"><label data-page-node-id="pNzGDwXMUqlqwUkbsoI8Il"><!--pnid:CElJhtSYqX4rVxsvHtMQ3K-->每月营业天数<span data-page-node-id="fK37rJ19XqGFrPKLdE9Nlf" class="unit"><!--pnid:iZXf9T1rfQCbga0bYWwa1P-->天</span></label><input data-page-node-id="bNNhNab5EJbm8eyFNe2HP8" id="days" max="31" min="1" type="number" value="28"></div>
+    <div class="group">
+      <div class="group-title">④ 定价与销量</div>
+      <div class="field"><label>单件售价<span class="unit">元</span></label><input id="price" min="0" step="0.1" type="number" value="25"></div>
+      <div class="field"><label>预计日均销量<span class="unit">件/天</span></label><input id="dailySales" min="0" type="number" value="80"></div>
+      <div class="field"><label>每月营业天数<span class="unit">天</span></label><input id="days" max="31" min="1" type="number" value="28"></div>
     </div>
 
-    <button data-page-node-id="nDVXeDOVDBDbZBdNLKJeJa" class="btn" id="calcBtn"><!--pnid:wlChgXcGLtXVPM5IO0pI5D-->立即计算</button>
-    <button data-page-node-id="G2zAxjPGUvPiyNtNuixmeZ" class="btn ghost" id="resetBtn"><!--pnid:XbT36qOKdo8bEL6viDNmul-->恢复默认示例</button>
+    <button class="btn" id="calcBtn">立即计算</button>
+    <button class="btn ghost" id="resetBtn">恢复默认示例</button>
   </div>
 
-  <!--pnid:UdLgadOSR7gsVsY0dzVfMa--><!-- 右侧结果 -->
-  <div data-page-node-id="SNnVFNjPMvsHNPwu8YthKq">
-    <div data-page-node-id="nYMLrX9Qnib4qQodQewzn8" class="kpis">
-      <div data-page-node-id="Kk3THemWU94P5tvbB7OfcC" class="kpi"><div data-page-node-id="LO9plPdQ2RtqLeiShVTB2e" class="label"><!--pnid:Wlk0Jxs2mlwpxpvPgkauQ7-->月净利润</div><div data-page-node-id="aPqE8T7ntnhbRbGy1Qbyyw" class="value" id="kProfit"><!--pnid:b8Th6HjUTzc69rTkKonlcB-->--</div><div data-page-node-id="uf4AxnMCOIG5k7ndbJr9Ed" class="sub" id="kMargin"><!--pnid:ZpM9IhsOGGSvaCrLcisKfz-->净利率 --</div></div>
-      <div data-page-node-id="BWq8MvLuUr7al2z9XrC9as" class="kpi"><div data-page-node-id="lnPOVtnLL1EMBX6AmNP0T1" class="label"><!--pnid:SlxYIS0bWQMSf0nv5YVy0r-->月总收入</div><div data-page-node-id="GmIUFomsEuH1MLjvjofwSm" class="value" id="kRevenue"><!--pnid:JeLT7ctHnH2z11ZqojcMip-->--</div><div data-page-node-id="bloGxDKezrkAbb5CigvIM0" class="sub" id="kDaysSub"><!--pnid:ST7ycRDoPzt1ZGO58EYoUH-->--</div></div>
-      <div data-page-node-id="Y5GfOij5FoRavRe6RRSqyJ" class="kpi"><div data-page-node-id="ArATux6pgUGFY2mi4PbvZj" class="label"><!--pnid:ZhyAdwOF6IdgpgoLkp21nF-->盈亏平衡点</div><div data-page-node-id="El57FqjGL3tlSf5gws2Som" class="value" id="kBreakeven"><!--pnid:aEQm2kK1Ax72j56jOWFrj9-->--</div><div data-page-node-id="tD0jOFmxpkhX3ro7pMDkr9" class="sub"><!--pnid:nNcQxzr9r6DC2H50tbn81r-->每天需卖出（件）</div></div>
-      <div data-page-node-id="8CAfU3UbtbATbGmnI1EmV5" class="kpi"><div data-page-node-id="SVRKEKwr6wtEfEIY3zosFk" class="label"><!--pnid:fR2OWjGq4Ud6fYrtlYE7LU-->回本周期</div><div data-page-node-id="2AYdD8lk7HGd9CqV0tChnj" class="value" id="kPayback"><!--pnid:NrNZBtZ0L3ujVGSMpoSLF8-->--</div><div data-page-node-id="XbMoeEsk3Atxac0Fmei3I3" class="sub" id="kPaybackSub"><!--pnid:KasduEXIPoYU1eSaQbyuF0-->--</div></div>
+  <!-- 右侧结果 -->
+  <div>
+    <div class="kpis">
+      <div class="kpi"><div class="label">月净利润</div><div class="value" id="kProfit">--</div><div class="sub" id="kMargin">净利率 --</div></div>
+      <div class="kpi"><div class="label">月总收入</div><div class="value" id="kRevenue">--</div><div class="sub" id="kDaysSub">--</div></div>
+      <div class="kpi"><div class="label">盈亏平衡点</div><div class="value" id="kBreakeven">--</div><div class="sub">每天需卖出（件）</div></div>
+      <div class="kpi"><div class="label">回本周期</div><div class="value" id="kPayback">--</div><div class="sub" id="kPaybackSub">--</div></div>
     </div>
 
-    <div data-page-node-id="HM0AjuzQpAQIaWj9GcGQ4w" class="charts">
-      <div data-page-node-id="lS3zKiEqHsU1Skj0uxbaYB" class="card">
-        <h2 data-page-node-id="TvbuonNebyTnCmyTcC67Mx"><span data-page-node-id="FiOXgF1sXcHTgX1Mny3W4k" class="dot"></span><!--pnid:X2jT2sxYFHPwYmSr90cHBT-->收入 vs 成本 · 盈亏平衡分析</h2>
-        <svg data-page-node-id="CT1CptILP47Ltp2j1VVl8u" id="chartBE" viewBox="0 0 560 320"></svg>
-        <div data-page-node-id="ywlbCDM7W7Rq5sjWuBYumv" class="tip" id="verdict"></div>
+    <div class="charts">
+      <div class="card">
+        <h2><span class="dot"></span>收入 vs 成本 · 盈亏平衡分析</h2>
+        <svg id="chartBE" viewBox="0 0 560 320"></svg>
+        <div class="tip" id="verdict"></div>
       </div>
 
-      <div data-page-node-id="Xi6sFcsdE0GsazGwg1fhda" class="card">
-        <h2 data-page-node-id="JWEw00riQb0dGc1e6AM8hO"><span data-page-node-id="ncZFJJFewM7gENFQCxDeqK" class="dot"></span><!--pnid:uqRZkNZxUCu5dS6esKUE1n-->每月成本结构</h2>
-        <svg data-page-node-id="FRL2e0oQ8ntQQnTlCU5VVI" id="chartDonut" viewBox="0 0 300 300"></svg>
-        <div data-page-node-id="CAyiiytocGKIB4ao09yoIY">
-          <div data-page-node-id="qk0cjRiT5IW8sdfWu6wyjZ" class="summary-row"><span data-page-node-id="NJwrND9eaSF6HAayy241HC"><!--pnid:a350lnaWB6AF36FCspq4Bm-->固定成本合计</span><span data-page-node-id="4JY3pxeybrTNVirVi0w3pB" class="v" id="sFixed"><!--pnid:mcb66tvk4JjGeaLiusSuCo-->--</span></div>
-          <div data-page-node-id="ErX3hZy5ICUvWmNt9zv94y" class="summary-row"><span data-page-node-id="FGlM8lJzGHlYwQecnaltNq"><!--pnid:Pg504VXU4qWhri1xpzoZqz-->变动成本合计</span><span data-page-node-id="hcQy65s0flj5qmVlBYFMYc" class="v" id="sVar"><!--pnid:uSussB94TvQwvonmx9rCGa-->--</span></div>
-          <div data-page-node-id="n1wRoB1B9sLLR4dQsiJRjY" class="summary-row"><span data-page-node-id="bZwdkfE1YlQnbzaQaxukdT"><!--pnid:Vsfq8VVfEPuUUXvcqDqnmL-->月总成本</span><span data-page-node-id="HRK81icbHXoiqancWNA6dz" class="v" id="sTotal"><!--pnid:HhPf1Ae2rgdutpBLs2MDyO-->--</span></div>
-          <div data-page-node-id="NGvmFNR2rL8REKp5MxDdOl" class="summary-row"><span data-page-node-id="uYy93QCIpBL3vqFwv9sLmY"><!--pnid:JOSganJNSWfLSBdiq30ATh-->单件毛利</span><span data-page-node-id="3NweheoqeuUcZKZue0gHLW" class="v" id="sGross"><!--pnid:8XM1DLAPwPpJdFWu1UqnMx-->--</span></div>
-          <div data-page-node-id="b36qbztRKvddLzBMITc0BL" class="summary-row"><span data-page-node-id="CDA1O41Y8wEk38zTLp6kaw"><!--pnid:24xJ3rTRytKbAHd2MxYcw8-->初期投入合计</span><span data-page-node-id="BwIOh0XVFjxmFuhVVvQ5T5" class="v" id="sInvest"><!--pnid:T5oviiKH3Xm7UiWInZXTV2-->--</span></div>
+      <div class="card">
+        <h2><span class="dot"></span>每月成本结构</h2>
+        <svg id="chartDonut" viewBox="0 0 300 300"></svg>
+        <div>
+          <div class="summary-row"><span>固定成本合计</span><span class="v" id="sFixed">--</span></div>
+          <div class="summary-row"><span>变动成本合计</span><span class="v" id="sVar">--</span></div>
+          <div class="summary-row"><span>月总成本</span><span class="v" id="sTotal">--</span></div>
+          <div class="summary-row"><span>单件毛利</span><span class="v" id="sGross">--</span></div>
+          <div class="summary-row"><span>初期投入合计</span><span class="v" id="sInvest">--</span></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!--pnid:Kj7xdX6mie0Lb65RemVsqB--><!-- 常用小生意计算工具 -->
-<section data-page-node-id="hZERT2Uzq5wFiFxKXiMfMX" class="tools-section">
-  <h2 data-page-node-id="4ChvKTPLXiJ6RzQgwk4WVh"><!--pnid:OUgQZ1yaOiQPSUKRIVbPwd-->常用小生意计算工具</h2>
-  <p data-page-node-id="tsYGKEOHIHspUbz2wHgHms" class="sub"><!--pnid:jRFJS2Ij0P3vcqVnMn97nd-->改数字即时出结果，覆盖日常摆摊、开店、外卖等常见算账场景</p>
-  <div data-page-node-id="wDA3BUcWhPP0Aj3rkZn9uh" class="tools">
+<!-- 常用小生意计算工具 -->
+<section class="tools-section">
+  <h2>常用小生意计算工具</h2>
+  <p class="sub">改数字即时出结果，覆盖日常摆摊、开店、外卖等常见算账场景</p>
+  <div class="tools">
 
-    <div data-page-node-id="iI607kaaX3D9QSwL4xlmOV" class="tool-card">
-      <h3 data-page-node-id="lwrZprODATj6Ar5q1bSoXC"><span data-page-node-id="Cis12OAcnVuVknryVqPoaF" class="dot"></span><!--pnid:IhyRWVkaOdeASCcH17iWVr-->商品利润计算器</h3>
-      <div data-page-node-id="daqfXIA0jea5cWG4HmL9ea" class="tfield"><label data-page-node-id="BJ7aJ2gGAwA5hqOCRAUkQo"><!--pnid:2pz3Rwf2Y9ZKpRSQPVGKD7-->售价<span data-page-node-id="asBFumg0LTfGoRSEIY6WCi" class="unit"><!--pnid:yX5EtQsRxdaxKhkfwjSLch-->元</span></label><input data-page-node-id="niIoGb2UKgkJKv9zL9wf6V" id="tp_price" min="0" step="0.1" type="number" value="25"></div>
-      <div data-page-node-id="eiyzQJjPcqjJBo97jAbPOV" class="tfield"><label data-page-node-id="VhFmnSvY6Mjfky2H9u6UM7"><!--pnid:FGC3nS6R5RzKLpm9WtGqSz-->单件成本<span data-page-node-id="5xWy6xzAQ4sJ0sIEvs9J4U" class="unit"><!--pnid:5i369vw5jZY3RVPYPJOasq-->元</span></label><input data-page-node-id="XoUwsU4dCtNOycYP7ZRwdm" id="tp_cost" min="0" step="0.1" type="number" value="10"></div>
-      <div data-page-node-id="XQgb5moszW3WszSgdYPasY" class="tfield"><label data-page-node-id="Pn2JEmA2mmxW0gQTSmjfGf"><!--pnid:hpeWJUS4spThmwCyF8sy4a-->销量<span data-page-node-id="EXXuOl8aIG1IF9itu6uNov" class="unit"><!--pnid:Esmln504Tu1OswK4DJs8es-->件</span></label><input data-page-node-id="Sl96Pb4MIxw0yFkFX98LNU" id="tp_qty" min="0" type="number" value="100"></div>
-      <div data-page-node-id="UTXR0vRQTGCWPZlmYhQuLM" class="tout" id="tp_out"></div>
+    <div class="tool-card">
+      <h3><span class="dot"></span>商品利润计算器</h3>
+      <div class="tfield"><label>售价<span class="unit">元</span></label><input id="tp_price" min="0" step="0.1" type="number" value="25"></div>
+      <div class="tfield"><label>单件成本<span class="unit">元</span></label><input id="tp_cost" min="0" step="0.1" type="number" value="10"></div>
+      <div class="tfield"><label>销量<span class="unit">件</span></label><input id="tp_qty" min="0" type="number" value="100"></div>
+      <div class="tout" id="tp_out"></div>
     </div>
 
-    <div data-page-node-id="m32A2pmSHBgJsIGMTlnALb" class="tool-card">
-      <h3 data-page-node-id="lhTsu4b2XYeudouOMSlTIh"><span data-page-node-id="nsyDu2OsUDixjBSUGrgTsh" class="dot"></span><!--pnid:ZJtpzJpKYlToipiWqZBXNw-->毛利率计算器</h3>
-      <div data-page-node-id="3gvEat50ZkgXt6xmZ5aa2G" class="tfield"><label data-page-node-id="8sSkuCV5CH4zDU93FRkKva"><!--pnid:UXfvi1gVjjMfB1xzyiAy1q-->售价<span data-page-node-id="f9xT6KbeMFdMN3hg6xRLD2" class="unit"><!--pnid:boBUDnNXTccdskxXk0K52D-->元</span></label><input data-page-node-id="W8SZ3BC4wFFBtMyK7FBc9T" id="gm_price" min="0" step="0.1" type="number" value="25"></div>
-      <div data-page-node-id="rLOmmEENDtJi7sjh9E32ZQ" class="tfield"><label data-page-node-id="ghsF6Q90LaFis3KIY9wJmg"><!--pnid:Zx038uN7mB6HnYqmB7TZNW-->成本<span data-page-node-id="R0UW4H446i8EHSjYPy3F11" class="unit"><!--pnid:bLKWCBZIKWgAdC5xIPOw7B-->元</span></label><input data-page-node-id="s32FR6QnDHeLQPu3fQNxXC" id="gm_cost" min="0" step="0.1" type="number" value="10"></div>
-      <div data-page-node-id="6ke5CUQ0A8sNSU5NSxpvpX" class="tout" id="gm_out"></div>
+    <div class="tool-card">
+      <h3><span class="dot"></span>毛利率计算器</h3>
+      <div class="tfield"><label>售价<span class="unit">元</span></label><input id="gm_price" min="0" step="0.1" type="number" value="25"></div>
+      <div class="tfield"><label>成本<span class="unit">元</span></label><input id="gm_cost" min="0" step="0.1" type="number" value="10"></div>
+      <div class="tout" id="gm_out"></div>
     </div>
 
-    <div data-page-node-id="7DQySvszXB7jxVNSwlDw5b" class="tool-card">
-      <h3 data-page-node-id="c4yIIEuujECRfJO1jO9287"><span data-page-node-id="TbygrE8gWcS6KU4N8PkDva" class="dot"></span><!--pnid:97ZLTdURAHWYEPLU2y0kTD-->打折利润计算器</h3>
-      <div data-page-node-id="mp5JyFZwTfTPAZaWl9hGUM" class="tfield"><label data-page-node-id="DFULRAXXyNHyd4pbkPPTWP"><!--pnid:s23Ki1AjvqtNG7Byeht7qM-->原价<span data-page-node-id="xKx2LX1QD0yhPj9ZP14jbY" class="unit"><!--pnid:tlMx9i4NJdPgC9ALXlCsEQ-->元</span></label><input data-page-node-id="xt9MQbO12308FzwnKqBcgM" id="dc_price" min="0" step="0.1" type="number" value="99"></div>
-      <div data-page-node-id="MmwIZuG3GLl4EGWRwjGDRJ" class="tfield"><label data-page-node-id="aslLPaq2LqcU602vOTvuGh"><!--pnid:eTyH8yKxU979Hlw0Ye3dL5-->折扣<span data-page-node-id="Mog5kjXJb58TEQz2i0NjbK" class="unit"><!--pnid:JdrHMXyuYggPbXWhCQ3FR1-->折（8.5 = 85%）</span></label><input data-page-node-id="krhQoh0XNAbsZs36lIFR9b" id="dc_disc" max="10" min="0" step="0.1" type="number" value="8.5"></div>
-      <div data-page-node-id="ZMTK16aDNBB4KVc0ZkQN16" class="tfield"><label data-page-node-id="AZ0SQReG8UqCS0OptT79Iw"><!--pnid:0O7GjVXukTjXmXAMRywDoy-->单件成本<span data-page-node-id="rGmnPj74T0j8r73retMNT1" class="unit"><!--pnid:eyzAV0So7jiIajO8uA2znx-->元</span></label><input data-page-node-id="SRQdWizK8CQhrpuVZvcIfq" id="dc_cost" min="0" step="0.1" type="number" value="40"></div>
-      <div data-page-node-id="HwsEa1pLhLYZrh6w7RDY7o" class="tout" id="dc_out"></div>
+    <div class="tool-card">
+      <h3><span class="dot"></span>打折利润计算器</h3>
+      <div class="tfield"><label>原价<span class="unit">元</span></label><input id="dc_price" min="0" step="0.1" type="number" value="99"></div>
+      <div class="tfield"><label>折扣<span class="unit">折（8.5 = 85%）</span></label><input id="dc_disc" max="10" min="0" step="0.1" type="number" value="8.5"></div>
+      <div class="tfield"><label>单件成本<span class="unit">元</span></label><input id="dc_cost" min="0" step="0.1" type="number" value="40"></div>
+      <div class="tout" id="dc_out"></div>
     </div>
 
-    <div data-page-node-id="DOlxBTAQ4nhM5r0OPgxE17" class="tool-card">
-      <h3 data-page-node-id="6GJEkwRD1yxIX9WbZWD2EY"><span data-page-node-id="HMGLGTjz6SMmlgu0CyXW2u" class="dot"></span><!--pnid:cRMs51s3xVOQ9tGE8yTyFk-->回本周期计算器</h3>
-      <div data-page-node-id="avCEuLeXpDg4FkTZKn5esX" class="tfield"><label data-page-node-id="w3gCrsIbqHJNZWbX3f1NK7"><!--pnid:XfzROQuDPDk3jAKmITQ1Jm-->总投入<span data-page-node-id="2JCkaFq4jtqyA4GNH8WaEK" class="unit"><!--pnid:91WP6lSWOpoh6EuVrvkVGK-->元</span></label><input data-page-node-id="qIZ2yUTal8nxTZrVW3CKye" id="pb_invest" min="0" type="number" value="100000"></div>
-      <div data-page-node-id="fHSIsQx3icoO2Wby5wZ9SS" class="tfield"><label data-page-node-id="hUdM9Qdyl29bhjM2F7adfn"><!--pnid:FokJ2QJTXwNZymzsz7Ohya-->每天净利润<span data-page-node-id="md1a8zcMASTODA8ZAzo3lY" class="unit"><!--pnid:aS5GNQSKc4r1acyhESps0G-->元/天</span></label><input data-page-node-id="kJS2xxi7m0xf7t7bANIgZM" id="pb_daily" min="0" step="0.1" type="number" value="800"></div>
-      <div data-page-node-id="JkGGdLNp5r1W0U92LxhGCx" class="tout" id="pb_out"></div>
+    <div class="tool-card">
+      <h3><span class="dot"></span>回本周期计算器</h3>
+      <div class="tfield"><label>总投入<span class="unit">元</span></label><input id="pb_invest" min="0" type="number" value="100000"></div>
+      <div class="tfield"><label>每天净利润<span class="unit">元/天</span></label><input id="pb_daily" min="0" step="0.1" type="number" value="800"></div>
+      <div class="tout" id="pb_out"></div>
     </div>
 
-    <div data-page-node-id="ZpJ0uzIErTpgKeJl9qvmDX" class="tool-card">
-      <h3 data-page-node-id="RmjwteteoQilnyAQwWWCGB"><span data-page-node-id="oSzQwYFhGvPV4QMtEhqs6g" class="dot"></span><!--pnid:sXA7tYVJXHcPhMbBxaaRsw-->摆摊利润计算器</h3>
-      <div data-page-node-id="NGLnDjf2fgqQdhVVkDtPeD" class="tfield"><label data-page-node-id="xpq5Sahh7OcegUUZ81XuYV"><!--pnid:A4KtiYp32AzITBgWcUoC8v-->售价<span data-page-node-id="Px7P2HCVMVlvjM0B3Kocqq" class="unit"><!--pnid:RaE5Q0DOZePJCGExA42ges-->元</span></label><input data-page-node-id="2PsPdu4RynXUHwsM85iMvu" id="st_price" min="0" step="0.1" type="number" value="15"></div>
-      <div data-page-node-id="Hsv5MLFx0Qu4JTO1Ro6yTW" class="tfield"><label data-page-node-id="Ypps7DJTMaD890WeXKfUTL"><!--pnid:LwUOzxV6Pz368KUgFva7lK-->单件成本<span data-page-node-id="emQs3wTvWta6gZFQxdOV6x" class="unit"><!--pnid:Lz2wByKDWmHgDSqGUaqlMD-->元</span></label><input data-page-node-id="CvCKthEMMgsiNciQlwWzme" id="st_cost" min="0" step="0.1" type="number" value="6"></div>
-      <div data-page-node-id="MbRqK89DZpjkz5Hm6kJ08p" class="tfield"><label data-page-node-id="Wpp3l0sQLoNim8sc3e8w01"><!--pnid:UCoqDMgUKjrXTPvKJIHnZz-->日销量<span data-page-node-id="xSOUN1oe02B1G8KdBjDItc" class="unit"><!--pnid:vwCstyZns91WiA8dz7Iigd-->件/天</span></label><input data-page-node-id="u7zV0i6zeBsMQ17cXAoaSX" id="st_qty" min="0" type="number" value="60"></div>
-      <div data-page-node-id="0IvwTnbLGv4ZQEk17PLnR6" class="tfield"><label data-page-node-id="1I5Z0AJqdOdSrJVv7Uzl9Y"><!--pnid:751qJINlHUiRfOyH0CeKCg-->摊位费<span data-page-node-id="fRupbZvOtR6M43sDwkMqOQ" class="unit"><!--pnid:RqzCiopBvBpasYA4UU81n2-->元/天</span></label><input data-page-node-id="CqKTk9QoeuQZJbPuHOcwaX" id="st_booth" min="0" type="number" value="100"></div>
-      <div data-page-node-id="QEJEciobVRJVywoxMTKJLk" class="tfield"><label data-page-node-id="jn9ZrPfvRmCrFRNeDGnZnP"><!--pnid:MMjvM5WnCOQcLWCaBlrZOR-->每月出摊天数<span data-page-node-id="Wg7iqRu85pl5j6N2Kpy5dW" class="unit"><!--pnid:2FX8NTk8V82D4BWzwEV1br-->天</span></label><input data-page-node-id="VnA6FqPjrQAEL1Ws4H2VNq" id="st_days" max="31" min="1" type="number" value="26"></div>
-      <div data-page-node-id="r6FnpsARgwdlRSpfY4Aogy" class="tout" id="st_out"></div>
+    <div class="tool-card">
+      <h3><span class="dot"></span>摆摊利润计算器</h3>
+      <div class="tfield"><label>售价<span class="unit">元</span></label><input id="st_price" min="0" step="0.1" type="number" value="15"></div>
+      <div class="tfield"><label>单件成本<span class="unit">元</span></label><input id="st_cost" min="0" step="0.1" type="number" value="6"></div>
+      <div class="tfield"><label>日销量<span class="unit">件/天</span></label><input id="st_qty" min="0" type="number" value="60"></div>
+      <div class="tfield"><label>摊位费<span class="unit">元/天</span></label><input id="st_booth" min="0" type="number" value="100"></div>
+      <div class="tfield"><label>每月出摊天数<span class="unit">天</span></label><input id="st_days" max="31" min="1" type="number" value="26"></div>
+      <div class="tout" id="st_out"></div>
     </div>
 
-    <div data-page-node-id="EC4Whkkl3DaN4XqbZSKGjY" class="tool-card">
-      <h3 data-page-node-id="C38nKjDYYlLRWIiG71dk6B"><span data-page-node-id="YfWQNMmbGyVaPQ2aLVczx2" class="dot"></span><!--pnid:x18iGDBmb1hpDGoymDYk3s-->外卖利润计算器</h3>
-      <div data-page-node-id="YY8PG49tkSTrEkev9n5Tni" class="tfield"><label data-page-node-id="8bdwciaekX373g2KS0dOGn"><!--pnid:EClhtpBCiEOWEt82wiMPvl-->售价<span data-page-node-id="4OfFpoeRPHAEkQR7Afm0UJ" class="unit"><!--pnid:BW4qAKBkBqyKMHOV766S3N-->元</span></label><input data-page-node-id="r18jejjteUWDGRhr0qIzUK" id="wm_price" min="0" step="0.1" type="number" value="28"></div>
-      <div data-page-node-id="SvyFnupsSXAR4wnR3w6d8D" class="tfield"><label data-page-node-id="qMfj4nbgVGX0jNex0OLKXh"><!--pnid:K524OWtDvHryPSYvoeudSS-->平台抽成<span data-page-node-id="cM7pCMVRb3w2dLqPsjOCYf" class="unit"><!--pnid:RgpngBQImqc5OBhlqal0rR-->%</span></label><input data-page-node-id="uXQCFIYk4IIeBDqaYwZsZs" id="wm_rate" max="100" min="0" step="0.5" type="number" value="20"></div>
-      <div data-page-node-id="JmmjbFPluyzgoG3RVsJiMc" class="tfield"><label data-page-node-id="rtdwXNxXGRSW79ecvgDGg3"><!--pnid:A5GyLfdK1C4GwxXs19cZXT-->单笔成本<span data-page-node-id="iMhTLuM7I31jm4d1ySOch7" class="unit"><!--pnid:e62WJw4aambpd16Pu03oau-->元</span></label><input data-page-node-id="f4fuxmzBd0UKRNAt1W4kRZ" id="wm_cost" min="0" step="0.1" type="number" value="12"></div>
-      <div data-page-node-id="yL5yP9XGks73mmTAB9LPCl" class="tout" id="wm_out"></div>
+    <div class="tool-card">
+      <h3><span class="dot"></span>外卖利润计算器</h3>
+      <div class="tfield"><label>售价<span class="unit">元</span></label><input id="wm_price" min="0" step="0.1" type="number" value="28"></div>
+      <div class="tfield"><label>平台抽成<span class="unit">%</span></label><input id="wm_rate" max="100" min="0" step="0.5" type="number" value="20"></div>
+      <div class="tfield"><label>单笔成本<span class="unit">元</span></label><input id="wm_cost" min="0" step="0.1" type="number" value="12"></div>
+      <div class="tout" id="wm_out"></div>
     </div>
 
   </div>
 </section>
 
-<footer data-page-node-id="r4ZLQ6KKZRQdMNbo8J5Cz3"><!--pnid:YZlPqwNiyN9T7HvTfw3Iod-->数据仅保存在本地浏览器 · 结果仅供经营参考，请结合实际情况决策</footer>
+<footer>数据仅保存在本地浏览器 · 结果仅供经营参考，请结合实际情况决策</footer>
 
-<script data-page-node-id="XxbNVtH5Yv4NgauVdzAj9r" data-pnid-children="1eO4m3DEROJYs4i6xbc507">
+<script>
 (function () {
   const DEFAULTS = { renov:50000, equip:30000, deposit:20000, amortYears:3,
     rent:6000, salary:8000, utility:1500, otherFix:800,
@@ -492,8 +500,8 @@
     try { localStorage.setItem('biz-calc', JSON.stringify(v)); } catch (e) {}
   }
 
-  $('calcBtn').addEventListener('click', run);
-  ids.forEach(k => $(k).addEventListener('input', run));
+  $('calcBtn').addEventListener('click', function () { trackTool('主计算器（盈亏平衡）'); run(); });
+  ids.forEach(k => $(k).addEventListener('input', function () { trackTool('主计算器（盈亏平衡）'); run(); }));
   $('resetBtn').addEventListener('click', () => {
     ids.forEach(k => { $(k).value = DEFAULTS[k]; });
     run();
@@ -509,7 +517,21 @@
 })();
 </script>
 
-<script data-page-node-id="Jrjjr16v1enBiyv0ZqWxBo" data-pnid-children="qNB76TjPf2lxKkCaxfswrQ">
+<script>
+/* ===== 百度统计事件埋点 ===== */
+var _trackTimers = {};
+function trackTool(name) {
+  try {
+    if (typeof _hmt === 'undefined' || !_hmt.push) return;
+    var now = Date.now();
+    if (_trackTimers[name] && now - _trackTimers[name] < 10000) return; // 10 秒去重，避免刷事件
+    _trackTimers[name] = now;
+    _hmt.push(['_trackEvent', 'tool_use', name, location.hostname || 'local']);
+  } catch (e) {}
+}
+</script>
+
+<script>
 /* ===== 常用小生意计算工具 ===== */
 (function () {
   const $ = id => document.getElementById(id);
@@ -602,15 +624,15 @@
   }
 
   const bindings = [
-    ['tp_price,tp_cost,tp_qty', calcProduct],
-    ['gm_price,gm_cost', calcGrossMargin],
-    ['dc_price,dc_disc,dc_cost', calcDiscount],
-    ['pb_invest,pb_daily', calcPayback],
-    ['st_price,st_cost,st_qty,st_booth,st_days', calcStall],
-    ['wm_price,wm_rate,wm_cost', calcDelivery],
+    ['tp_price,tp_cost,tp_qty', calcProduct, '商品利润计算器'],
+    ['gm_price,gm_cost', calcGrossMargin, '毛利率计算器'],
+    ['dc_price,dc_disc,dc_cost', calcDiscount, '打折利润计算器'],
+    ['pb_invest,pb_daily', calcPayback, '回本周期计算器'],
+    ['st_price,st_cost,st_qty,st_booth,st_days', calcStall, '摆摊利润计算器'],
+    ['wm_price,wm_rate,wm_cost', calcDelivery, '外卖利润计算器'],
   ];
-  bindings.forEach(([ids, fn]) => {
-    ids.split(',').forEach(id => $(id).addEventListener('input', fn));
+  bindings.forEach(([ids, fn, name]) => {
+    ids.split(',').forEach(id => $(id).addEventListener('input', () => { trackTool(name); fn(); }));
     fn();
   });
 })();
