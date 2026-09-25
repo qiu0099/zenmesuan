@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html data-page-node-id="KthUJHhoxAt2KIfRzEcXUj" lang="zh-CN">
+<head data-page-node-id="54Lu0OGzjPrc0nkW4kKNIZ">
+<script data-page-node-id="gUIR4CImpOjyy7gzPdl8ZQ" src="/page/page_comm/inject.js"></script>
+<meta data-page-node-id="vn5swH0i8DSpGS5HDLe5Hi" charset="UTF-8">
+<meta data-page-node-id="iHQG96KQIq9cmlgQ4tL0Ke" content="width=device-width, initial-scale=1.0" name="viewport">
+<title data-page-node-id="sVRw8SuNlJ7wq5mnIH41Z5" data-pnid-children="uE8m1j9MlQOnNdnKd7cVo5">小生意成本计算器</title>
+<style data-page-node-id="SdKRNpBvk3pwtHDJdXCyvL" data-pnid-children="GSF0JFVRJjJshzZeSjZh0X">
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --border: #e4e7ec;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #2563eb;
+    --primary-soft: #eff4ff;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #ea580c;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+    color: #fff;
+    padding: 28px 24px 22px;
+  }
+  header .wrap { max-width: 1180px; margin: 0 auto; }
+  header h1 { font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+  header p { margin-top: 6px; opacity: .85; font-size: 14px; }
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .container { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(16,24,40,.05);
+  }
+  .card h2 { font-size: 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card h2 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+  .group { margin-bottom: 18px; }
+  .group:last-child { margin-bottom: 0; }
+  .group-title {
+    font-size: 12px; color: var(--muted); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;
+  }
+  .field { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+  .field label { font-size: 14px; color: var(--text); flex: 1; }
+  .field .unit { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .field input {
+    width: 120px; padding: 7px 10px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 14px; text-align: right; outline: none;
+    transition: border .15s, box-shadow .15s;
+  }
+  .field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .btn {
+    width: 100%; padding: 12px; border: none; border-radius: 10px;
+    background: var(--primary); color: #fff; font-size: 15px; font-weight: 600;
+    cursor: pointer; margin-top: 8px; transition: background .15s;
+  }
+  .btn:hover { background: #1d4ed8; }
+  .btn.ghost { background: #fff; color: var(--primary); border: 1px solid var(--border); margin-top: 8px; }
+  .btn.ghost:hover { background: var(--primary-soft); }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  @media (max-width: 700px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; box-shadow: 0 1px 3px rgba(16,24,40,.05);
+  }
+  .kpi .label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .kpi .value { font-size: 22px; font-weight: 700; }
+  .kpi .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .pos { color: var(--green); } .neg { color: var(--red); }
+  .charts { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
+  svg { display: block; width: 100%; height: auto; }
+  .summary-row {
+    display: flex; justify-content: space-between; padding: 9px 0;
+    border-bottom: 1px dashed var(--border); font-size: 14px;
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row .v { font-weight: 600; }
+  .tip {
+    margin-top: 14px; padding: 12px 14px; border-radius: 10px;
+    background: #fffbeb; border: 1px solid #fde68a; font-size: 13px; color: #92400e;
+    line-height: 1.7;
+  }
+  .tip b { font-weight: 700; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 0 0 30px; }
+
+  /* ===== 常用小生意计算工具 ===== */
+  .tools-section { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; }
+  .tools-section > h2 {
+    font-size: 20px; margin: 6px 0 4px; display: flex; align-items: center; gap: 10px;
+  }
+  .tools-section > .sub { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+  .tools {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 1000px) { .tools { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px)  { .tools { grid-template-columns: 1fr; } }
+  .tool-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px; box-shadow: 0 1px 3px rgba(16,24,40,.05);
+    display: flex; flex-direction: column;
+  }
+  .tool-card h3 { font-size: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .tool-card h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
+  .tfield { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .tfield label { font-size: 13px; color: var(--text); flex: 1; }
+  .tfield .unit { font-size: 11px; color: var(--muted); margin-left: 4px; }
+  .tfield input {
+    width: 96px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; text-align: right; outline: none; transition: border .15s, box-shadow .15s;
+  }
+  .tfield input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+  .tout { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .tout .row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; }
+  .tout .row .k { color: var(--muted); }
+  .tout .row .v { font-weight: 700; }
+</style>
+</head>
+<body data-page-node-id="y0FC3J5dqCpgljQ2Mn2Ugv">
+
+<header data-page-node-id="sbIdHNW3j6SajNU0zr5WmV">
+  <div data-page-node-id="5ytayLCEsgBomEKPd0cNdY" class="wrap">
+    <h1 data-page-node-id="8OA9Lq3A3JCAnu2xJnvh4i"><!--pnid:9HSV4qzKvX6gwZHIMKkvzW-->小生意成本计算器</h1>
+    <p data-page-node-id="uswuKdNgC0UrEb5efwGptI"><!--pnid:Ih80XVMXJyWvdbyZ01hUt9-->算清固定成本、变动成本、盈亏平衡点和回本周期 —— 开店之前，先算后干</p>
+  </div>
+</header>
+
+<div data-page-node-id="02csxonx6aTYulI8OJib7f" class="container">
+
+  <!--pnid:VzlduIaMXgZ0AXIC9nRlSQ--><!-- 左侧输入 -->
+  <div data-page-node-id="xCl1CadwkugahCggDDJ6qC" class="card">
+    <h2 data-page-node-id="AxJYsDkg2QISmSzfu8e8Hp"><span data-page-node-id="3DSNc7PP8mFYbomL6sChEJ" class="dot"></span><!--pnid:ub40wwOvRGqgb0ocaK5t11-->输入你的生意数据</h2>
+
+    <div data-page-node-id="r82NFh5OTWu9I1BR7OmhDQ" class="group">
+      <div data-page-node-id="bC1tVap03Yf87xqaAznLTH" class="group-title"><!--pnid:LObNFK6rxQyu3cmiQkmiTG-->① 初期投入（一次性）</div>
+      <div data-page-node-id="8Uon9Rqo1cXMLw37SihXo1" class="field"><label data-page-node-id="BICumznDNtgQfuDGBbty7U"><!--pnid:OID53dwqWNfLOXA6B1cn8N-->装修费用<span data-page-node-id="MHFO03KGLADVjDyTvkVhJk" class="unit"><!--pnid:DOWRlFFR2mK433hB4TmInP-->元</span></label><input data-page-node-id="2AAhixqVanRniR9J6CVWiX" id="renov" min="0" type="number" value="50000"></div>
+      <div data-page-node-id="o1In9QN9eLyyahVFbInLEW" class="field"><label data-page-node-id="77T5Vc5CKyA4xQELRUgn1K"><!--pnid:c4c0cfRf8WIlTRAOBgdaaZ-->设备 / 器具<span data-page-node-id="783eYMk1Y3M0fAK39a22Ep" class="unit"><!--pnid:HcIX3FnKLrqvmyulIWbS0z-->元</span></label><input data-page-node-id="QTvSHWqRSLhtDoFamOlZOZ" id="equip" min="0" type="number" value="30000"></div>
+      <div data-page-node-id="NRC39OYNMS1AtYZ7tmvXjD" class="field"><label data-page-node-id="kwPO3Xq2qd6xUEMxqZCk4V"><!--pnid:tFKvMXLy0v9xSSOSCibTkM-->押金 / 顶手费<span data-page-node-id="eJ87mXPIhBZ7ualjKDHjYN" class="unit"><!--pnid:d8WcKKS0W5YRjoKZZtDNiU-->元</span></label><input data-page-node-id="ZU14X98EHJNGWJnbfdKUMp" id="deposit" min="0" type="number" value="20000"></div>
+      <div data-page-node-id="5MN56QuIHgLimt4HxNGbtC" class="field"><label data-page-node-id="Dfn0ZVKKdJ6XuuVMsz0GMc"><!--pnid:hzZxf8ecevLPmq3nD1ldrw-->装修 / 设备摊销年限<span data-page-node-id="3PLeWHoNLb8Ko2zqLQJvEb" class="unit"><!--pnid:1F7wVoCiBpsNeOGBnCxvAg-->年</span></label><input data-page-node-id="RYaTaXWCaL0zH8FhgLYWyN" id="amortYears" min="1" step="0.5" type="number" value="3"></div>
+    </div>
+
+    <div data-page-node-id="MAntsuOIWleEJ0fb28SybY" class="group">
+      <div data-page-node-id="7Lj2uxlEJQ0uvAja7kQ0jx" class="group-title"><!--pnid:11aMv2bHwO6JOL1dxlFcFR-->② 每月固定成本</div>
+      <div data-page-node-id="Mi5RhiqmSheUCmnYYH7Jv4" class="field"><label data-page-node-id="qz9T7gkw1k9Jk2ezsQ9NSw"><!--pnid:UXGNhe6Rf36UKaEAoeYoXr-->店铺租金<span data-page-node-id="JkqgljJkKaK9EzrKmhE63r" class="unit"><!--pnid:sn0r5xU4zbXbBWBOxJwl4W-->元/月</span></label><input data-page-node-id="wXOlLIYCHLGvRH8e7PKe5r" id="rent" min="0" type="number" value="6000"></div>
+      <div data-page-node-id="cq9ckfXrXhbkc4Iv9cnjic" class="field"><label data-page-node-id="3Cjp7M223kNXkFv5Ci0J1m"><!--pnid:CQZ49AUMAmq2BnhED3RdIh-->员工工资<span data-page-node-id="m4Ad5h7pjpcU6ktHOoasHK" class="unit"><!--pnid:xUnNLdevu4NZEHtyoFV3Il-->元/月</span></label><input data-page-node-id="MeMUsy7vE53Ay2gvyGwyu1" id="salary" min="0" type="number" value="8000"></div>
+      <div data-page-node-id="5wFVn7NSwFIbxx0xl0QVBG" class="field"><label data-page-node-id="H3fadhYxP3bkFrQj3FTfjO"><!--pnid:OuUtHspBgd5CShiJIvY89i-->水电物业网络<span data-page-node-id="tbCB21OGjbceNycAKxVMiS" class="unit"><!--pnid:FxKNuUO3MSAsPipOyoT0Km-->元/月</span></label><input data-page-node-id="WU4oarpXx0oc7OB2EZVW5Y" id="utility" min="0" type="number" value="1500"></div>
+      <div data-page-node-id="h89ykTXHqwvteOrFzuyqDe" class="field"><label data-page-node-id="FVd2bwclCy0wgvNCXUczti"><!--pnid:PnledJ2wkFsfhMrgTou7PT-->其他固定开支<span data-page-node-id="Z3G99WXu3dlznmSs0UCEPb" class="unit"><!--pnid:Yxypn7m5xqtfvH9iPMED5U-->元/月</span></label><input data-page-node-id="kosyBgnpR8kZhg6hv4uimF" id="otherFix" min="0" type="number" value="800"></div>
+    </div>
+
+    <div data-page-node-id="OFT8AMaLYjnP8lI0uUZINH" class="group">
+      <div data-page-node-id="fkvxNDFLJZxk8wBnYee4d7" class="group-title"><!--pnid:evCcfKRiMnSqfxXUUVpoJ9-->③ 单件变动成本</div>
+      <div data-page-node-id="PnZ2m1Am4wAFBV0sn4iXvJ" class="field"><label data-page-node-id="8vN1cNbJK895FdaL6mip2Z"><!--pnid:4FsbNxuTATraa5YpylVU42-->单件材料 / 进货成本<span data-page-node-id="PzyDI9RqOxojMIXZrp2To4" class="unit"><!--pnid:lS6LAYH2QCRMom4Fs6PqSo-->元</span></label><input data-page-node-id="5aQjPsB3me9F9aenLm3WKc" id="mat" min="0" step="0.1" type="number" value="8"></div>
+      <div data-page-node-id="IdKPsPkNaq5c7Cn0tX2mgu" class="field"><label data-page-node-id="Ujgp3VUWo5JCTX0b0ozVEd"><!--pnid:g0eBbFcc8yhPucYbqsZOuP-->单件包装 / 耗材<span data-page-node-id="k5TFWjrunF8JGH83b1pJZc" class="unit"><!--pnid:O7umfweuV0GpmM4LWHsGBt-->元</span></label><input data-page-node-id="sa2UBpAioUEZ89wuvroma7" id="pack" min="0" step="0.1" type="number" value="1"></div>
+      <div data-page-node-id="ofazG9bVqZBJNpbhyhFdyF" class="field"><label data-page-node-id="DXacfcGoq2Mj6FWEaayngw"><!--pnid:Jbi2mPO82pHovBkNSzofSm-->单件其他变动成本<span data-page-node-id="Cf7uHLzjOoxl6wzB87sWxb" class="unit"><!--pnid:0jUbJBJ4eF2h1xJkboRa26-->元</span></label><input data-page-node-id="uiThk8yvVYmTZ2dVQhpa0z" id="otherVar" min="0" step="0.1" type="number" value="0.5"></div>
+    </div>
+
+    <div data-page-node-id="e2kV2vnBBeUHkNSL5WIeGs" class="group">
+      <div data-page-node-id="NvdsZhGWYKRzTD9VnIDAD9" class="group-title"><!--pnid:sZV32dIGLGyfjnZWXOkZx6-->④ 定价与销量</div>
+      <div data-page-node-id="oQ1szgA2sKxOxT3Mbv7DYp" class="field"><label data-page-node-id="zStB8qFAUU9Z8Ei7mAqhYy"><!--pnid:YsaFldfsnodXLk0RcmKXmy-->单件售价<span data-page-node-id="RIRi6p836ehUAXA053mOVu" class="unit"><!--pnid:prlj5JykVcxl13LtaccLf4-->元</span></label><input data-page-node-id="JMtdiIwxg5yIDR0uk6vRTM" id="price" min="0" step="0.1" type="number" value="25"></div>
+      <div data-page-node-id="dJYX28qMNz3lltajoH7sfm" class="field"><label data-page-node-id="bXpJ2iM6wQoQs6pHWtTHFk"><!--pnid:JvNiS7dXPDQHFlG9GIbhjS-->预计日均销量<span data-page-node-id="4R8gStsxQcwebAD14C6jEs" class="unit"><!--pnid:hc840LFvvKgLHaJMCWqBdF-->件/天</span></label><input data-page-node-id="2y54o7RRVLWdylrvktxpyp" id="dailySales" min="0" type="number" value="80"></div>
+      <div data-page-node-id="uulrUQhVTJrclf9qFFjZAX" class="field"><label data-page-node-id="pNzGDwXMUqlqwUkbsoI8Il"><!--pnid:CElJhtSYqX4rVxsvHtMQ3K-->每月营业天数<span data-page-node-id="fK37rJ19XqGFrPKLdE9Nlf" class="unit"><!--pnid:iZXf9T1rfQCbga0bYWwa1P-->天</span></label><input data-page-node-id="bNNhNab5EJbm8eyFNe2HP8" id="days" max="31" min="1" type="number" value="28"></div>
+    </div>
+
+    <button data-page-node-id="nDVXeDOVDBDbZBdNLKJeJa" class="btn" id="calcBtn"><!--pnid:wlChgXcGLtXVPM5IO0pI5D-->立即计算</button>
+    <button data-page-node-id="G2zAxjPGUvPiyNtNuixmeZ" class="btn ghost" id="resetBtn"><!--pnid:XbT36qOKdo8bEL6viDNmul-->恢复默认示例</button>
+  </div>
+
+  <!--pnid:UdLgadOSR7gsVsY0dzVfMa--><!-- 右侧结果 -->
+  <div data-page-node-id="SNnVFNjPMvsHNPwu8YthKq">
+    <div data-page-node-id="nYMLrX9Qnib4qQodQewzn8" class="kpis">
+      <div data-page-node-id="Kk3THemWU94P5tvbB7OfcC" class="kpi"><div data-page-node-id="LO9plPdQ2RtqLeiShVTB2e" class="label"><!--pnid:Wlk0Jxs2mlwpxpvPgkauQ7-->月净利润</div><div data-page-node-id="aPqE8T7ntnhbRbGy1Qbyyw" class="value" id="kProfit"><!--pnid:b8Th6HjUTzc69rTkKonlcB-->--</div><div data-page-node-id="uf4AxnMCOIG5k7ndbJr9Ed" class="sub" id="kMargin"><!--pnid:ZpM9IhsOGGSvaCrLcisKfz-->净利率 --</div></div>
+      <div data-page-node-id="BWq8MvLuUr7al2z9XrC9as" class="kpi"><div data-page-node-id="lnPOVtnLL1EMBX6AmNP0T1" class="label"><!--pnid:SlxYIS0bWQMSf0nv5YVy0r-->月总收入</div><div data-page-node-id="GmIUFomsEuH1MLjvjofwSm" class="value" id="kRevenue"><!--pnid:JeLT7ctHnH2z11ZqojcMip-->--</div><div data-page-node-id="bloGxDKezrkAbb5CigvIM0" class="sub" id="kDaysSub"><!--pnid:ST7ycRDoPzt1ZGO58EYoUH-->--</div></div>
+      <div data-page-node-id="Y5GfOij5FoRavRe6RRSqyJ" class="kpi"><div data-page-node-id="ArATux6pgUGFY2mi4PbvZj" class="label"><!--pnid:ZhyAdwOF6IdgpgoLkp21nF-->盈亏平衡点</div><div data-page-node-id="El57FqjGL3tlSf5gws2Som" class="value" id="kBreakeven"><!--pnid:aEQm2kK1Ax72j56jOWFrj9-->--</div><div data-page-node-id="tD0jOFmxpkhX3ro7pMDkr9" class="sub"><!--pnid:nNcQxzr9r6DC2H50tbn81r-->每天需卖出（件）</div></div>
+      <div data-page-node-id="8CAfU3UbtbATbGmnI1EmV5" class="kpi"><div data-page-node-id="SVRKEKwr6wtEfEIY3zosFk" class="label"><!--pnid:fR2OWjGq4Ud6fYrtlYE7LU-->回本周期</div><div data-page-node-id="2AYdD8lk7HGd9CqV0tChnj" class="value" id="kPayback"><!--pnid:NrNZBtZ0L3ujVGSMpoSLF8-->--</div><div data-page-node-id="XbMoeEsk3Atxac0Fmei3I3" class="sub" id="kPaybackSub"><!--pnid:KasduEXIPoYU1eSaQbyuF0-->--</div></div>
+    </div>
+
+    <div data-page-node-id="HM0AjuzQpAQIaWj9GcGQ4w" class="charts">
+      <div data-page-node-id="lS3zKiEqHsU1Skj0uxbaYB" class="card">
+        <h2 data-page-node-id="TvbuonNebyTnCmyTcC67Mx"><span data-page-node-id="FiOXgF1sXcHTgX1Mny3W4k" class="dot"></span><!--pnid:X2jT2sxYFHPwYmSr90cHBT-->收入 vs 成本 · 盈亏平衡分析</h2>
+        <svg data-page-node-id="CT1CptILP47Ltp2j1VVl8u" id="chartBE" viewBox="0 0 560 320"></svg>
+        <div data-page-node-id="ywlbCDM7W7Rq5sjWuBYumv" class="tip" id="verdict"></div>
+      </div>
+
+      <div data-page-node-id="Xi6sFcsdE0GsazGwg1fhda" class="card">
+        <h2 data-page-node-id="JWEw00riQb0dGc1e6AM8hO"><span data-page-node-id="ncZFJJFewM7gENFQCxDeqK" class="dot"></span><!--pnid:uqRZkNZxUCu5dS6esKUE1n-->每月成本结构</h2>
+        <svg data-page-node-id="FRL2e0oQ8ntQQnTlCU5VVI" id="chartDonut" viewBox="0 0 300 300"></svg>
+        <div data-page-node-id="CAyiiytocGKIB4ao09yoIY">
+          <div data-page-node-id="qk0cjRiT5IW8sdfWu6wyjZ" class="summary-row"><span data-page-node-id="NJwrND9eaSF6HAayy241HC"><!--pnid:a350lnaWB6AF36FCspq4Bm-->固定成本合计</span><span data-page-node-id="4JY3pxeybrTNVirVi0w3pB" class="v" id="sFixed"><!--pnid:mcb66tvk4JjGeaLiusSuCo-->--</span></div>
+          <div data-page-node-id="ErX3hZy5ICUvWmNt9zv94y" class="summary-row"><span data-page-node-id="FGlM8lJzGHlYwQecnaltNq"><!--pnid:Pg504VXU4qWhri1xpzoZqz-->变动成本合计</span><span data-page-node-id="hcQy65s0flj5qmVlBYFMYc" class="v" id="sVar"><!--pnid:uSussB94TvQwvonmx9rCGa-->--</span></div>
+          <div data-page-node-id="n1wRoB1B9sLLR4dQsiJRjY" class="summary-row"><span data-page-node-id="bZwdkfE1YlQnbzaQaxukdT"><!--pnid:Vsfq8VVfEPuUUXvcqDqnmL-->月总成本</span><span data-page-node-id="HRK81icbHXoiqancWNA6dz" class="v" id="sTotal"><!--pnid:HhPf1Ae2rgdutpBLs2MDyO-->--</span></div>
+          <div data-page-node-id="NGvmFNR2rL8REKp5MxDdOl" class="summary-row"><span data-page-node-id="uYy93QCIpBL3vqFwv9sLmY"><!--pnid:JOSganJNSWfLSBdiq30ATh-->单件毛利</span><span data-page-node-id="3NweheoqeuUcZKZue0gHLW" class="v" id="sGross"><!--pnid:8XM1DLAPwPpJdFWu1UqnMx-->--</span></div>
+          <div data-page-node-id="b36qbztRKvddLzBMITc0BL" class="summary-row"><span data-page-node-id="CDA1O41Y8wEk38zTLp6kaw"><!--pnid:24xJ3rTRytKbAHd2MxYcw8-->初期投入合计</span><span data-page-node-id="BwIOh0XVFjxmFuhVVvQ5T5" class="v" id="sInvest"><!--pnid:T5oviiKH3Xm7UiWInZXTV2-->--</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--pnid:Kj7xdX6mie0Lb65RemVsqB--><!-- 常用小生意计算工具 -->
+<section data-page-node-id="hZERT2Uzq5wFiFxKXiMfMX" class="tools-section">
+  <h2 data-page-node-id="4ChvKTPLXiJ6RzQgwk4WVh"><!--pnid:OUgQZ1yaOiQPSUKRIVbPwd-->常用小生意计算工具</h2>
+  <p data-page-node-id="tsYGKEOHIHspUbz2wHgHms" class="sub"><!--pnid:jRFJS2Ij0P3vcqVnMn97nd-->改数字即时出结果，覆盖日常摆摊、开店、外卖等常见算账场景</p>
+  <div data-page-node-id="wDA3BUcWhPP0Aj3rkZn9uh" class="tools">
+
+    <div data-page-node-id="iI607kaaX3D9QSwL4xlmOV" class="tool-card">
+      <h3 data-page-node-id="lwrZprODATj6Ar5q1bSoXC"><span data-page-node-id="Cis12OAcnVuVknryVqPoaF" class="dot"></span><!--pnid:IhyRWVkaOdeASCcH17iWVr-->商品利润计算器</h3>
+      <div data-page-node-id="daqfXIA0jea5cWG4HmL9ea" class="tfield"><label data-page-node-id="BJ7aJ2gGAwA5hqOCRAUkQo"><!--pnid:2pz3Rwf2Y9ZKpRSQPVGKD7-->售价<span data-page-node-id="asBFumg0LTfGoRSEIY6WCi" class="unit"><!--pnid:yX5EtQsRxdaxKhkfwjSLch-->元</span></label><input data-page-node-id="niIoGb2UKgkJKv9zL9wf6V" id="tp_price" min="0" step="0.1" type="number" value="25"></div>
+      <div data-page-node-id="eiyzQJjPcqjJBo97jAbPOV" class="tfield"><label data-page-node-id="VhFmnSvY6Mjfky2H9u6UM7"><!--pnid:FGC3nS6R5RzKLpm9WtGqSz-->单件成本<span data-page-node-id="5xWy6xzAQ4sJ0sIEvs9J4U" class="unit"><!--pnid:5i369vw5jZY3RVPYPJOasq-->元</span></label><input data-page-node-id="XoUwsU4dCtNOycYP7ZRwdm" id="tp_cost" min="0" step="0.1" type="number" value="10"></div>
+      <div data-page-node-id="XQgb5moszW3WszSgdYPasY" class="tfield"><label data-page-node-id="Pn2JEmA2mmxW0gQTSmjfGf"><!--pnid:hpeWJUS4spThmwCyF8sy4a-->销量<span data-page-node-id="EXXuOl8aIG1IF9itu6uNov" class="unit"><!--pnid:Esmln504Tu1OswK4DJs8es-->件</span></label><input data-page-node-id="Sl96Pb4MIxw0yFkFX98LNU" id="tp_qty" min="0" type="number" value="100"></div>
+      <div data-page-node-id="UTXR0vRQTGCWPZlmYhQuLM" class="tout" id="tp_out"></div>
+    </div>
+
+    <div data-page-node-id="m32A2pmSHBgJsIGMTlnALb" class="tool-card">
+      <h3 data-page-node-id="lhTsu4b2XYeudouOMSlTIh"><span data-page-node-id="nsyDu2OsUDixjBSUGrgTsh" class="dot"></span><!--pnid:ZJtpzJpKYlToipiWqZBXNw-->毛利率计算器</h3>
+      <div data-page-node-id="3gvEat50ZkgXt6xmZ5aa2G" class="tfield"><label data-page-node-id="8sSkuCV5CH4zDU93FRkKva"><!--pnid:UXfvi1gVjjMfB1xzyiAy1q-->售价<span data-page-node-id="f9xT6KbeMFdMN3hg6xRLD2" class="unit"><!--pnid:boBUDnNXTccdskxXk0K52D-->元</span></label><input data-page-node-id="W8SZ3BC4wFFBtMyK7FBc9T" id="gm_price" min="0" step="0.1" type="number" value="25"></div>
+      <div data-page-node-id="rLOmmEENDtJi7sjh9E32ZQ" class="tfield"><label data-page-node-id="ghsF6Q90LaFis3KIY9wJmg"><!--pnid:Zx038uN7mB6HnYqmB7TZNW-->成本<span data-page-node-id="R0UW4H446i8EHSjYPy3F11" class="unit"><!--pnid:bLKWCBZIKWgAdC5xIPOw7B-->元</span></label><input data-page-node-id="s32FR6QnDHeLQPu3fQNxXC" id="gm_cost" min="0" step="0.1" type="number" value="10"></div>
+      <div data-page-node-id="6ke5CUQ0A8sNSU5NSxpvpX" class="tout" id="gm_out"></div>
+    </div>
+
+    <div data-page-node-id="7DQySvszXB7jxVNSwlDw5b" class="tool-card">
+      <h3 data-page-node-id="c4yIIEuujECRfJO1jO9287"><span data-page-node-id="TbygrE8gWcS6KU4N8PkDva" class="dot"></span><!--pnid:97ZLTdURAHWYEPLU2y0kTD-->打折利润计算器</h3>
+      <div data-page-node-id="mp5JyFZwTfTPAZaWl9hGUM" class="tfield"><label data-page-node-id="DFULRAXXyNHyd4pbkPPTWP"><!--pnid:s23Ki1AjvqtNG7Byeht7qM-->原价<span data-page-node-id="xKx2LX1QD0yhPj9ZP14jbY" class="unit"><!--pnid:tlMx9i4NJdPgC9ALXlCsEQ-->元</span></label><input data-page-node-id="xt9MQbO12308FzwnKqBcgM" id="dc_price" min="0" step="0.1" type="number" value="99"></div>
+      <div data-page-node-id="MmwIZuG3GLl4EGWRwjGDRJ" class="tfield"><label data-page-node-id="aslLPaq2LqcU602vOTvuGh"><!--pnid:eTyH8yKxU979Hlw0Ye3dL5-->折扣<span data-page-node-id="Mog5kjXJb58TEQz2i0NjbK" class="unit"><!--pnid:JdrHMXyuYggPbXWhCQ3FR1-->折（8.5 = 85%）</span></label><input data-page-node-id="krhQoh0XNAbsZs36lIFR9b" id="dc_disc" max="10" min="0" step="0.1" type="number" value="8.5"></div>
+      <div data-page-node-id="ZMTK16aDNBB4KVc0ZkQN16" class="tfield"><label data-page-node-id="AZ0SQReG8UqCS0OptT79Iw"><!--pnid:0O7GjVXukTjXmXAMRywDoy-->单件成本<span data-page-node-id="rGmnPj74T0j8r73retMNT1" class="unit"><!--pnid:eyzAV0So7jiIajO8uA2znx-->元</span></label><input data-page-node-id="SRQdWizK8CQhrpuVZvcIfq" id="dc_cost" min="0" step="0.1" type="number" value="40"></div>
+      <div data-page-node-id="HwsEa1pLhLYZrh6w7RDY7o" class="tout" id="dc_out"></div>
+    </div>
+
+    <div data-page-node-id="DOlxBTAQ4nhM5r0OPgxE17" class="tool-card">
+      <h3 data-page-node-id="6GJEkwRD1yxIX9WbZWD2EY"><span data-page-node-id="HMGLGTjz6SMmlgu0CyXW2u" class="dot"></span><!--pnid:cRMs51s3xVOQ9tGE8yTyFk-->回本周期计算器</h3>
+      <div data-page-node-id="avCEuLeXpDg4FkTZKn5esX" class="tfield"><label data-page-node-id="w3gCrsIbqHJNZWbX3f1NK7"><!--pnid:XfzROQuDPDk3jAKmITQ1Jm-->总投入<span data-page-node-id="2JCkaFq4jtqyA4GNH8WaEK" class="unit"><!--pnid:91WP6lSWOpoh6EuVrvkVGK-->元</span></label><input data-page-node-id="qIZ2yUTal8nxTZrVW3CKye" id="pb_invest" min="0" type="number" value="100000"></div>
+      <div data-page-node-id="fHSIsQx3icoO2Wby5wZ9SS" class="tfield"><label data-page-node-id="hUdM9Qdyl29bhjM2F7adfn"><!--pnid:FokJ2QJTXwNZymzsz7Ohya-->每天净利润<span data-page-node-id="md1a8zcMASTODA8ZAzo3lY" class="unit"><!--pnid:aS5GNQSKc4r1acyhESps0G-->元/天</span></label><input data-page-node-id="kJS2xxi7m0xf7t7bANIgZM" id="pb_daily" min="0" step="0.1" type="number" value="800"></div>
+      <div data-page-node-id="JkGGdLNp5r1W0U92LxhGCx" class="tout" id="pb_out"></div>
+    </div>
+
+    <div data-page-node-id="ZpJ0uzIErTpgKeJl9qvmDX" class="tool-card">
+      <h3 data-page-node-id="RmjwteteoQilnyAQwWWCGB"><span data-page-node-id="oSzQwYFhGvPV4QMtEhqs6g" class="dot"></span><!--pnid:sXA7tYVJXHcPhMbBxaaRsw-->摆摊利润计算器</h3>
+      <div data-page-node-id="NGLnDjf2fgqQdhVVkDtPeD" class="tfield"><label data-page-node-id="xpq5Sahh7OcegUUZ81XuYV"><!--pnid:A4KtiYp32AzITBgWcUoC8v-->售价<span data-page-node-id="Px7P2HCVMVlvjM0B3Kocqq" class="unit"><!--pnid:RaE5Q0DOZePJCGExA42ges-->元</span></label><input data-page-node-id="2PsPdu4RynXUHwsM85iMvu" id="st_price" min="0" step="0.1" type="number" value="15"></div>
+      <div data-page-node-id="Hsv5MLFx0Qu4JTO1Ro6yTW" class="tfield"><label data-page-node-id="Ypps7DJTMaD890WeXKfUTL"><!--pnid:LwUOzxV6Pz368KUgFva7lK-->单件成本<span data-page-node-id="emQs3wTvWta6gZFQxdOV6x" class="unit"><!--pnid:Lz2wByKDWmHgDSqGUaqlMD-->元</span></label><input data-page-node-id="CvCKthEMMgsiNciQlwWzme" id="st_cost" min="0" step="0.1" type="number" value="6"></div>
+      <div data-page-node-id="MbRqK89DZpjkz5Hm6kJ08p" class="tfield"><label data-page-node-id="Wpp3l0sQLoNim8sc3e8w01"><!--pnid:UCoqDMgUKjrXTPvKJIHnZz-->日销量<span data-page-node-id="xSOUN1oe02B1G8KdBjDItc" class="unit"><!--pnid:vwCstyZns91WiA8dz7Iigd-->件/天</span></label><input data-page-node-id="u7zV0i6zeBsMQ17cXAoaSX" id="st_qty" min="0" type="number" value="60"></div>
+      <div data-page-node-id="0IvwTnbLGv4ZQEk17PLnR6" class="tfield"><label data-page-node-id="1I5Z0AJqdOdSrJVv7Uzl9Y"><!--pnid:751qJINlHUiRfOyH0CeKCg-->摊位费<span data-page-node-id="fRupbZvOtR6M43sDwkMqOQ" class="unit"><!--pnid:RqzCiopBvBpasYA4UU81n2-->元/天</span></label><input data-page-node-id="CqKTk9QoeuQZJbPuHOcwaX" id="st_booth" min="0" type="number" value="100"></div>
+      <div data-page-node-id="QEJEciobVRJVywoxMTKJLk" class="tfield"><label data-page-node-id="jn9ZrPfvRmCrFRNeDGnZnP"><!--pnid:MMjvM5WnCOQcLWCaBlrZOR-->每月出摊天数<span data-page-node-id="Wg7iqRu85pl5j6N2Kpy5dW" class="unit"><!--pnid:2FX8NTk8V82D4BWzwEV1br-->天</span></label><input data-page-node-id="VnA6FqPjrQAEL1Ws4H2VNq" id="st_days" max="31" min="1" type="number" value="26"></div>
+      <div data-page-node-id="r6FnpsARgwdlRSpfY4Aogy" class="tout" id="st_out"></div>
+    </div>
+
+    <div data-page-node-id="EC4Whkkl3DaN4XqbZSKGjY" class="tool-card">
+      <h3 data-page-node-id="C38nKjDYYlLRWIiG71dk6B"><span data-page-node-id="YfWQNMmbGyVaPQ2aLVczx2" class="dot"></span><!--pnid:x18iGDBmb1hpDGoymDYk3s-->外卖利润计算器</h3>
+      <div data-page-node-id="YY8PG49tkSTrEkev9n5Tni" class="tfield"><label data-page-node-id="8bdwciaekX373g2KS0dOGn"><!--pnid:EClhtpBCiEOWEt82wiMPvl-->售价<span data-page-node-id="4OfFpoeRPHAEkQR7Afm0UJ" class="unit"><!--pnid:BW4qAKBkBqyKMHOV766S3N-->元</span></label><input data-page-node-id="r18jejjteUWDGRhr0qIzUK" id="wm_price" min="0" step="0.1" type="number" value="28"></div>
+      <div data-page-node-id="SvyFnupsSXAR4wnR3w6d8D" class="tfield"><label data-page-node-id="qMfj4nbgVGX0jNex0OLKXh"><!--pnid:K524OWtDvHryPSYvoeudSS-->平台抽成<span data-page-node-id="cM7pCMVRb3w2dLqPsjOCYf" class="unit"><!--pnid:RgpngBQImqc5OBhlqal0rR-->%</span></label><input data-page-node-id="uXQCFIYk4IIeBDqaYwZsZs" id="wm_rate" max="100" min="0" step="0.5" type="number" value="20"></div>
+      <div data-page-node-id="JmmjbFPluyzgoG3RVsJiMc" class="tfield"><label data-page-node-id="rtdwXNxXGRSW79ecvgDGg3"><!--pnid:A5GyLfdK1C4GwxXs19cZXT-->单笔成本<span data-page-node-id="iMhTLuM7I31jm4d1ySOch7" class="unit"><!--pnid:e62WJw4aambpd16Pu03oau-->元</span></label><input data-page-node-id="f4fuxmzBd0UKRNAt1W4kRZ" id="wm_cost" min="0" step="0.1" type="number" value="12"></div>
+      <div data-page-node-id="yL5yP9XGks73mmTAB9LPCl" class="tout" id="wm_out"></div>
+    </div>
+
+  </div>
+</section>
+
+<footer data-page-node-id="r4ZLQ6KKZRQdMNbo8J5Cz3"><!--pnid:YZlPqwNiyN9T7HvTfw3Iod-->数据仅保存在本地浏览器 · 结果仅供经营参考，请结合实际情况决策</footer>
+
+<script data-page-node-id="XxbNVtH5Yv4NgauVdzAj9r" data-pnid-children="1eO4m3DEROJYs4i6xbc507">
+(function () {
+  const DEFAULTS = { renov:50000, equip:30000, deposit:20000, amortYears:3,
+    rent:6000, salary:8000, utility:1500, otherFix:800,
+    mat:8, pack:1, otherVar:0.5,
+    price:25, dailySales:80, days:28 };
+
+  const $ = id => document.getElementById(id);
+  const ids = Object.keys(DEFAULTS);
+  const fmt = n => Math.round(n).toLocaleString('zh-CN');
+
+  function readInputs() {
+    const v = {};
+    ids.forEach(k => { v[k] = Math.max(0, parseFloat($(k).value) || 0); });
+    if (v.amortYears <= 0) v.amortYears = 1;
+    if (v.days <= 0) v.days = 1;
+    return v;
+  }
+
+  function compute(v) {
+    const amortMonthly = (v.renov + v.equip) / (v.amortYears * 12); // 摊销计入固定成本
+    const fixed = v.rent + v.salary + v.utility + v.otherFix + amortMonthly;
+    const varUnit = v.mat + v.pack + v.otherVar;
+    const price = v.price;
+    const grossUnit = price - varUnit;
+    const monthlyUnits = v.dailySales * v.days;
+    const revenue = monthlyUnits * price;
+    const variable = monthlyUnits * varUnit;
+    const totalCost = fixed + variable;
+    const profit = revenue - totalCost;
+    const margin = revenue > 0 ? profit / revenue * 100 : 0;
+    const beUnitsDay = grossUnit > 0 ? fixed / grossUnit / v.days : Infinity;
+    const beUnitsMonth = grossUnit > 0 ? fixed / grossUnit : Infinity;
+    const invest = v.renov + v.equip + v.deposit;
+    const paybackMonths = profit > 0 ? invest / profit : Infinity;
+    // 盈亏平衡销量下的收入
+    const beRevenue = isFinite(beUnitsMonth) ? beUnitsMonth * price : 0;
+    return { amortMonthly, fixed, varUnit, grossUnit, monthlyUnits, revenue,
+             variable, totalCost, profit, margin, beUnitsDay, beUnitsMonth,
+             invest, paybackMonths, beRevenue };
+  }
+
+  function renderKPIs(r, v) {
+    const el = $('kProfit');
+    el.textContent = (r.profit >= 0 ? '¥' : '-¥') + fmt(Math.abs(r.profit));
+    el.className = 'value ' + (r.profit >= 0 ? 'pos' : 'neg');
+    $('kMargin').textContent = '净利率 ' + (isFinite(r.margin) ? r.margin.toFixed(1) + '%' : '--');
+    $('kRevenue').textContent = '¥' + fmt(r.revenue);
+    $('kDaysSub').textContent = '月销量 ' + fmt(r.monthlyUnits) + ' 件';
+    const be = $('kBreakeven');
+    if (isFinite(r.beUnitsDay)) {
+      be.textContent = Math.ceil(r.beUnitsDay);
+      be.className = 'value';
+      be.style.color = v.dailySales >= r.beUnitsDay ? '#16a34a' : '#dc2626';
+    } else {
+      be.textContent = '无法盈利';
+      be.className = 'value neg';
+    }
+    const pb = $('kPayback');
+    if (isFinite(r.paybackMonths)) {
+      pb.textContent = r.paybackMonths < 1 ? '不足 1 个月'
+        : r.paybackMonths < 24 ? Math.ceil(r.paybackMonths) + ' 个月'
+        : (r.paybackMonths / 12).toFixed(1) + ' 年';
+      pb.className = 'value';
+      pb.style.color = r.paybackMonths <= 18 ? '#16a34a' : '#ea580c';
+      $('kPaybackSub').textContent = '投入 ¥' + fmt(r.invest);
+    } else {
+      pb.textContent = '无法回本';
+      pb.className = 'value neg';
+      $('kPaybackSub').textContent = '当前定价下持续亏损';
+    }
+  }
+
+  function renderSummary(r, v) {
+    $('sFixed').textContent = '¥' + fmt(r.fixed);
+    $('sVar').textContent = '¥' + fmt(r.variable);
+    $('sTotal').textContent = '¥' + fmt(r.totalCost);
+    $('sGross').textContent = '¥' + r.grossUnit.toFixed(1) + ' / 件';
+    $('sInvest').textContent = '¥' + fmt(r.invest);
+
+    const tip = $('verdict');
+    if (!isFinite(r.beUnitsDay)) {
+      tip.innerHTML = '<b>⚠️ 注意：</b>单件毛利 ≤ 0（售价 ' + v.price.toFixed(1) +
+        ' 元 ≤ 单件变动成本 ' + r.varUnit.toFixed(1) + ' 元），无论卖多少都无法覆盖固定成本。请提高售价或压缩单件成本。';
+    } else if (r.profit >= 0) {
+      const surplus = v.dailySales - r.beUnitsDay;
+      tip.innerHTML = '<b>✅ 当前方案可盈利：</b>预计每天卖 ' + Math.round(v.dailySales) +
+        ' 件，比盈亏平衡点（' + Math.ceil(r.beUnitsDay) + ' 件/天）多 <b>' + Math.round(surplus) +
+        ' 件</b>，安全余量 ' + (r.beUnitsDay > 0 ? (surplus / r.beUnitsDay * 100).toFixed(0) : '∞') +
+        '%。建议余量保持在 30% 以上以应对淡季波动。';
+    } else {
+      const gapDays = r.beUnitsDay - v.dailySales;
+      tip.innerHTML = '<b>📉 当前方案亏损：</b>每天还需多卖 <b>' + Math.ceil(gapDays) +
+        ' 件</b>才能保本（目标 ' + Math.ceil(r.beUnitsDay) + ' 件/天）。可考虑：提高售价、降低租金/人工等固定成本，或压缩单件进货成本。';
+    }
+  }
+
+  // ---------- 盈亏平衡折线图 (SVG) ----------
+  function drawBE(r, v) {
+    const svg = $('chartBE');
+    const W = 560, H = 320, padL = 64, padR = 20, padT = 24, padB = 44;
+    const x0 = padL, y0 = H - padB, x1 = W - padR, y1 = padT;
+    const maxUnits = Math.max(r.monthlyUnits, isFinite(r.beUnitsMonth) ? r.beUnitsMonth * 1.5 : 1000) * 1.1;
+    const maxMoney = Math.max(r.revenue, r.totalCost, isFinite(r.beRevenue) ? r.beRevenue : 0) * 1.15 || 1;
+    const X = u => x0 + (u / maxUnits) * (x1 - x0);
+    const Y = m => y0 - (m / maxMoney) * (y0 - y1);
+
+    let s = '';
+    // 网格与Y轴刻度
+    for (let i = 0; i <= 4; i++) {
+      const m = maxMoney * i / 4, y = Y(m);
+      s += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#eceff3" stroke-width="1"/>`;
+      s += `<text x="${x0 - 8}" y="${y + 4}" text-anchor="end" font-size="10" fill="#8a94a6">${m >= 10000 ? (m/10000).toFixed(1)+'万' : Math.round(m)}</text>`;
+    }
+    // X轴刻度
+    for (let i = 0; i <= 5; i++) {
+      const u = maxUnits * i / 5, x = X(u);
+      s += `<text x="${x}" y="${y0 + 16}" text-anchor="middle" font-size="10" fill="#8a94a6">${Math.round(u/100)/10 ? (Math.round(u/100)/10)+'k件' : '0'}</text>`;
+    }
+    // 轴
+    s += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y0}" stroke="#cbd2dc" stroke-width="1.5"/>`;
+    s += `<line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" stroke="#cbd2dc" stroke-width="1.5"/>`;
+    s += `<text x="${W/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="#6b7280">月销量（件）</text>`;
+
+    // 总成本线（固定 + 变动）
+    s += `<line x1="${X(0)}" y1="${Y(r.fixed)}" x2="${X(maxUnits)}" y2="${Y(r.fixed + maxUnits * r.varUnit)}" stroke="#ea580c" stroke-width="2.5"/>`;
+    // 收入线
+    s += `<line x1="${X(0)}" y1="${Y(0)}" x2="${X(maxUnits)}" y2="${Y(maxUnits * v.price)}" stroke="#2563eb" stroke-width="2.5"/>`;
+
+    if (isFinite(r.beUnitsMonth) && r.beUnitsMonth <= maxUnits) {
+      const bx = X(r.beUnitsMonth), by = Y(r.beRevenue);
+      s += `<circle cx="${bx}" cy="${by}" r="5" fill="#fff" stroke="#16a34a" stroke-width="2.5"/>`;
+      s += `<text x="${bx + 10}" y="${by - 10}" font-size="11" fill="#16a34a" font-weight="700">盈亏平衡 ${fmt(r.beUnitsMonth)} 件</text>`;
+    }
+    // 当前销量点
+    const cx = X(Math.min(r.monthlyUnits, maxUnits)), cy = Y(r.revenue);
+    s += `<circle cx="${cx}" cy="${cy}" r="5" fill="#2563eb"/>`;
+    s += `<text x="${cx}" y="${cy + 18}" text-anchor="middle" font-size="10" fill="#2563eb">当前销量</text>`;
+
+    // 图例
+    s += `<rect x="${x0}" y="${y1 - 14}" width="14" height="4" rx="2" fill="#2563eb"/><text x="${x0+20}" y="${y1-8}" font-size="11" fill="#374151">收入</text>`;
+    s += `<rect x="${x0+70}" y="${y1 - 14}" width="14" height="4" rx="2" fill="#ea580c"/><text x="${x0+90}" y="${y1-8}" font-size="11" fill="#374151">总成本</text>`;
+
+    svg.innerHTML = s;
+  }
+
+  // ---------- 成本结构环形图 (SVG) ----------
+  function drawDonut(r, v) {
+    const svg = $('chartDonut');
+    const cx = 150, cy = 150, R = 92, rIn = 58;
+    const amort = r.amortMonthly;
+    const items = [
+      { name: '租金', val: v.rent, color: '#2563eb' },
+      { name: '工资', val: v.salary, color: '#7c3aed' },
+      { name: '水电物业', val: v.utility, color: '#0891b2' },
+      { name: '其他固定', val: v.otherFix, color: '#64748b' },
+      { name: '摊销', val: amort, color: '#94a3b8' },
+      { name: '材料/进货', val: v.mat * r.monthlyUnits, color: '#16a34a' },
+      { name: '包装', val: v.pack * r.monthlyUnits, color: '#65a30d' },
+      { name: '其他变动', val: v.otherVar * r.monthlyUnits, color: '#f59e0b' },
+    ].filter(d => d.val > 0);
+    const total = items.reduce((a, b) => a + b.val, 0) || 1;
+
+    let s = '', angle = -Math.PI / 2;
+    items.forEach(d => {
+      const frac = d.val / total;
+      const a2 = angle + frac * Math.PI * 2;
+      const large = frac > 0.5 ? 1 : 0;
+      const x1 = cx + R * Math.cos(angle), y1 = cy + R * Math.sin(angle);
+      const x2 = cx + R * Math.cos(a2), y2 = cy + R * Math.sin(a2);
+      const xi2 = cx + rIn * Math.cos(a2), yi2 = cy + rIn * Math.sin(a2);
+      const xi1 = cx + rIn * Math.cos(angle), yi1 = cy + rIn * Math.sin(angle);
+      if (frac >= 0.999) {
+        s += `<circle cx="${cx}" cy="${cy}" r="${(R+rIn)/2}" fill="none" stroke="${d.color}" stroke-width="${R-rIn}"/>`;
+      } else {
+        s += `<path d="M${x1},${y1} A${R},${R} 0 ${large} 1 ${x2},${y2} L${xi2},${yi2} A${rIn},${rIn} 0 ${large} 0 ${xi1},${yi1} Z" fill="${d.color}" opacity="0.92"/>`;
+      }
+      angle = a2;
+    });
+    s += `<text x="${cx}" y="${cy - 6}" text-anchor="middle" font-size="20" font-weight="700" fill="#1f2937">¥${fmt(total)}</text>`;
+    s += `<text x="${cx}" y="${cy + 16}" text-anchor="middle" font-size="11" fill="#6b7280">月总成本</text>`;
+
+    // 图例（右侧两列放不下则用底部列表）
+    let ly = 16, lx = 16;
+    items.forEach((d, i) => {
+      const col = i % 2, row = Math.floor(i / 2);
+      const gx = 12 + col * 150, gy = 284 + row * 0; // legend below donut is tight in 300 height; place at bottom
+    });
+    // 简化：把图例画在圆环下方一行（最多4项换行）
+    let lx2 = 12, ly2 = 292;
+    // 不够放，改为在 donut 下方用 HTML 图例
+    svg.innerHTML = s;
+
+    // HTML 图例
+    let legend = document.getElementById('donutLegend');
+    if (legend) legend.remove();
+    legend = document.createElement('div');
+    legend.id = 'donutLegend';
+    legend.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;';
+    legend.innerHTML = items.map(d =>
+      `<span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#374151;">
+        <span style="width:10px;height:10px;border-radius:3px;background:${d.color};display:inline-block;"></span>
+        ${d.name} ${fmt(d.val)}元 (${(d.val/total*100).toFixed(0)}%)</span>`).join('');
+    svg.parentNode.appendChild(legend);
+  }
+
+  function run() {
+    const v = readInputs();
+    const r = compute(v);
+    renderKPIs(r, v);
+    renderSummary(r, v);
+    drawBE(r, v);
+    drawDonut(r, v);
+    try { localStorage.setItem('biz-calc', JSON.stringify(v)); } catch (e) {}
+  }
+
+  $('calcBtn').addEventListener('click', run);
+  ids.forEach(k => $(k).addEventListener('input', run));
+  $('resetBtn').addEventListener('click', () => {
+    ids.forEach(k => { $(k).value = DEFAULTS[k]; });
+    run();
+  });
+
+  // 恢复上次输入
+  try {
+    const saved = JSON.parse(localStorage.getItem('biz-calc') || 'null');
+    if (saved) ids.forEach(k => { if (saved[k] !== undefined) $(k).value = saved[k]; });
+  } catch (e) {}
+
+  run();
+})();
+</script>
+
+<script data-page-node-id="Jrjjr16v1enBiyv0ZqWxBo" data-pnid-children="qNB76TjPf2lxKkCaxfswrQ">
+/* ===== 常用小生意计算工具 ===== */
+(function () {
+  const $ = id => document.getElementById(id);
+  const money = n => (n < 0 ? '-¥' : '¥') + Math.abs(Math.round(n * 100) / 100).toLocaleString('zh-CN', { maximumFractionDigits: 2 });
+  const pct = n => (isFinite(n) ? n.toFixed(1) + '%' : '--');
+  const row = (k, v, cls) => '<div class="row"><span class="k">' + k + '</span><span class="v ' + (cls || '') + '">' + v + '</span></div>';
+  const num = id => Math.max(0, parseFloat($(id).value) || 0);
+
+  function render(outId, rows) {
+    $(outId).innerHTML = rows.join('');
+  }
+
+  // 1. 商品利润：售价、成本、销量 → 利润、利润率
+  function calcProduct() {
+    const price = num('tp_price'), cost = num('tp_cost'), qty = num('tp_qty');
+    const unit = price - cost;
+    const total = unit * qty;
+    const rate = price > 0 ? unit / price * 100 : 0;
+    render('tp_out', [
+      row('单件利润', money(unit), unit >= 0 ? 'pos' : 'neg'),
+      row('总利润', money(total), total >= 0 ? 'pos' : 'neg'),
+      row('利润率', pct(rate), rate >= 0 ? 'pos' : 'neg')
+    ]);
+  }
+
+  // 2. 毛利率：售价、成本 → 毛利、毛利率
+  function calcGrossMargin() {
+    const price = num('gm_price'), cost = num('gm_cost');
+    const gross = price - cost;
+    const rate = price > 0 ? gross / price * 100 : 0;
+    render('gm_out', [
+      row('单件毛利', money(gross), gross >= 0 ? 'pos' : 'neg'),
+      row('毛利率', pct(rate), rate >= 0 ? 'pos' : 'neg'),
+      row('成本占售价', pct(price > 0 ? cost / price * 100 : 0))
+    ]);
+  }
+
+  // 3. 打折利润：原价、折扣、成本 → 折后利润
+  function calcDiscount() {
+    const orig = num('dc_price'), disc = num('dc_disc'), cost = num('dc_cost');
+    const sale = orig * Math.min(disc, 100) / 10;
+    const profit = sale - cost;
+    const rate = sale > 0 ? profit / sale * 100 : 0;
+    render('dc_out', [
+      row('折后售价', money(sale)),
+      row('折后单件利润', money(profit), profit >= 0 ? 'pos' : 'neg'),
+      row('利润率', pct(rate), rate >= 0 ? 'pos' : 'neg')
+    ]);
+  }
+
+  // 4. 回本周期：投入、每天利润 → 回本天数
+  function calcPayback() {
+    const invest = num('pb_invest'), daily = num('pb_daily');
+    if (daily <= 0) {
+      render('pb_out', [row('回本天数', daily <= 0 && invest > 0 ? '无法回本' : '--', 'neg')]);
+      return;
+    }
+    const days = invest / daily;
+    render('pb_out', [
+      row('回本天数', Math.ceil(days) + ' 天', 'pos'),
+      row('约合', days >= 30 ? (days / 30).toFixed(1) + ' 个月' : (days / 7).toFixed(1) + ' 周')
+    ]);
+  }
+
+  // 5. 摆摊利润：售价、成本、销量、摊位费 → 日/月利润
+  function calcStall() {
+    const price = num('st_price'), cost = num('st_cost'), qty = num('st_qty');
+    const booth = num('st_booth'), days = Math.max(1, num('st_days'));
+    const daily = (price - cost) * qty - booth;
+    const monthly = daily * days;
+    render('st_out', [
+      row('日利润', money(daily), daily >= 0 ? 'pos' : 'neg'),
+      row('月利润（' + Math.round(days) + ' 天）', money(monthly), monthly >= 0 ? 'pos' : 'neg'),
+      row('保本日销量', booth > 0 && price > cost ? Math.ceil(booth / (price - cost)) + ' 件' : '--')
+    ]);
+  }
+
+  // 6. 外卖利润：售价、平台抽成、成本 → 单笔实际利润
+  function calcDelivery() {
+    const price = num('wm_price'), rate = num('wm_rate'), cost = num('wm_cost');
+    const fee = price * Math.min(rate, 100) / 100;
+    const net = price - fee;
+    const profit = net - cost;
+    render('wm_out', [
+      row('平台抽成', money(fee), 'neg'),
+      row('抽成后到手', money(net)),
+      row('单笔实际利润', money(profit), profit >= 0 ? 'pos' : 'neg'),
+      row('单笔利润率', pct(price > 0 ? profit / price * 100 : 0), profit >= 0 ? 'pos' : 'neg')
+    ]);
+  }
+
+  const bindings = [
+    ['tp_price,tp_cost,tp_qty', calcProduct],
+    ['gm_price,gm_cost', calcGrossMargin],
+    ['dc_price,dc_disc,dc_cost', calcDiscount],
+    ['pb_invest,pb_daily', calcPayback],
+    ['st_price,st_cost,st_qty,st_booth,st_days', calcStall],
+    ['wm_price,wm_rate,wm_cost', calcDelivery],
+  ];
+  bindings.forEach(([ids, fn]) => {
+    ids.split(',').forEach(id => $(id).addEventListener('input', fn));
+    fn();
+  });
+})();
+</script>
+</body>
+</html>
