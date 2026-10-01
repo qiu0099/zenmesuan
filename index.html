@@ -71,141 +71,101 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
 .qrHint{font-size:10px;color:#9aaabc;margin-top:12px}
 
 
-/* ==================== 手机端适配 ==================== */
-@media (max-width: 768px){
-  html,body{
-    width:100%;
-    min-width:0;
-    overflow-x:hidden;
-    background:#f5f9fd;
-  }
-  .page{
-    width:100%;
-    min-width:0;
-    margin:0;
-  }
-  .hero{
-    width:100%;
-    min-width:0;
-    aspect-ratio:auto;
-    height:auto;
-    background:none;
-    padding-top:0;
-    overflow:hidden;
-  }
 
-  /* 手机端把原设计图拆成可响应的首页结构 */
-  .hero::before{
-    content:"";
-    display:block;
-    width:100%;
-    aspect-ratio:1536/1024;
-    background-image:inherit;
-    background-size:cover;
-    background-position:top center;
-  }
-
-  /* 工具热区改成真正的 2 列手机卡片布局 */
-  .hot{
-    position:relative;
-    left:auto!important;
-    top:auto!important;
-    width:auto!important;
-    height:0!important;
-    margin:0;
-    background:transparent;
-    outline:none!important;
-  }
-
-  /* 覆盖层：在手机端使用独立的透明网格承载点击 */
-  .hero{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    grid-auto-rows:0;
-    gap:0;
-  }
-  .hero::before{
-    grid-column:1/-1;
-    grid-row:1;
-  }
-
-  /* 手机端工具按钮仍精确落在原图对应区域，但使用绝对定位 */
-  .hero .hot{
-    position:absolute!important;
-    height:auto!important;
-    aspect-ratio:1.75/1;
-    z-index:6;
-  }
-  .hero .t1{left:4%!important;top:35.0%!important;width:43%!important}
-  .hero .t2{left:53%!important;top:35.0%!important;width:43%!important}
-  .hero .t3{left:4%!important;top:49.5%!important;width:43%!important}
-  .hero .t4{left:53%!important;top:49.5%!important;width:43%!important}
-  .hero .t5{left:4%!important;top:64.0%!important;width:43%!important}
-  .hero .t6{left:53%!important;top:64.0%!important;width:43%!important}
-  .hero .t7{left:4%!important;top:78.5%!important;width:43%!important}
-  .hero .t8{left:53%!important;top:78.5%!important;width:43%!important}
-  .hero .t9{left:4%!important;top:93.0%!important;width:43%!important}
-  .hero .t10{left:53%!important;top:93.0%!important;width:43%!important}
-  .hero .t11{left:4%!important;top:107.5%!important;width:43%!important}
-  .hero .t12{left:53%!important;top:107.5%!important;width:43%!important}
-
-  /* 移动端不再把超出图片高度的热区截断，使用滚动页面承载工具 */
-  .designHot,.shareHot,.livePhone,
-  .hero > button[aria-label="立即咨询"],
-  .hero > button[aria-label="微信同号"]{
-    display:none!important;
-  }
-
-  /* 手机上右侧宣传栏不适合横向挤压，抽屉功能保留 */
-  .drawer{
-    width:100%;
-    max-width:none;
-    padding:22px 18px 28px;
-    border-radius:20px 20px 0 0;
-    top:auto;
-    bottom:0;
-    height:min(82vh,680px);
-    transform:translateY(105%);
-    box-shadow:0 -14px 45px rgba(13,56,105,.22);
-  }
-  .drawer.show{transform:translateY(0)}
-  .drawer h2{font-size:20px}
-  .drawer .desc{font-size:12px}
-  .grid{grid-template-columns:1fr 1fr;gap:8px}
-  input,select,.calcBtn{height:46px;font-size:15px}
-  .resultMain{font-size:24px}
-
-  /* 二维码弹窗 */
-  .qrModal{
-    width:min(340px,calc(100vw - 28px));
-    padding:24px 18px 20px;
-  }
-  .qrBox{
-    width:min(260px,76vw);
-    height:min(260px,76vw);
-  }
+/* ===== 三屏自适应布局 ===== */
+.responsiveApp{display:none}
+@media (max-width:1100px){
+  html,body{overflow-x:hidden}
+  .page{display:none}
+  .responsiveApp{display:block;min-height:100vh;background:linear-gradient(180deg,#f7fbff 0%,#fff 48%,#f4fbff 100%);color:#123b7a}
+  .rHero{position:relative;overflow:hidden;min-height:230px;padding:28px 5% 32px;background:linear-gradient(120deg,#dff3ff 0%,#fff 47%,#cceeff 100%);}
+  .rHero:after{content:"";position:absolute;right:-12%;bottom:-45%;width:62%;height:145%;border-radius:50%;background:rgba(255,255,255,.52)}
+  .rBrand{position:relative;z-index:2;font-size:18px;font-weight:900;letter-spacing:.4px;color:#173f83}
+  .rBrand span{font-weight:500;font-size:11px;color:#5b7797;margin-left:8px}
+  .rTitle{position:relative;z-index:2;margin:28px 0 7px;font-size:clamp(30px,5vw,54px);line-height:1.15;font-weight:900;color:#123f86}
+  .rTitle em{font-style:normal;color:#1379ee}
+  .rSub{position:relative;z-index:2;font-size:14px;color:#476c94;line-height:1.7}
+  .rSection{width:min(1120px,90%);margin:-22px auto 0;position:relative;z-index:3}
+  .rPanel{background:rgba(255,255,255,.96);border:1px solid #e5eef7;border-radius:20px;box-shadow:0 10px 35px rgba(27,88,137,.10);padding:20px}
+  .rPanelTitle{display:flex;align-items:center;gap:10px;margin-bottom:15px;font-size:20px;font-weight:900;color:#123f86}
+  .rPanelTitle:before{content:"❤";display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:#167df0;color:#fff;font-size:15px}
+  .rTools{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .rTool{min-height:116px;border:1px solid #e2edf6;border-radius:15px;background:linear-gradient(135deg,#fff,#f3faff);padding:15px;text-align:left;cursor:pointer;color:#153e7d;transition:.18s;box-shadow:0 3px 10px rgba(30,93,145,.04)}
+  .rTool:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(30,93,145,.12);border-color:#bcdcf8}
+  .rIcon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:12px;margin-bottom:10px;background:linear-gradient(135deg,#1589f4,#42c6ff)}
+  .rTool:nth-child(3n+2) .rIcon{background:linear-gradient(135deg,#13bf71,#72d96e)}
+  .rTool:nth-child(3n) .rIcon{background:linear-gradient(135deg,#8d42e8,#c66cff)}
+  .rName{font-size:14px;font-weight:800;margin-bottom:5px}
+  .rDesc{font-size:10px;line-height:1.5;color:#8397ae}
+  .rService{margin-top:14px;border-radius:18px;background:linear-gradient(120deg,#e7f7ff,#fff);border:1px solid #d6ebf8;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .rService h3{margin:0 0 6px;font-size:20px;color:#123f86}.rService p{margin:0;color:#6c839b;font-size:12px}
+  .rContact{border:0;background:#137cf0;color:#fff;border-radius:24px;padding:11px 20px;font-weight:800;cursor:pointer;white-space:nowrap}
+  .rShare{margin-top:14px;border-radius:18px;padding:16px 18px;background:linear-gradient(120deg,#086de6,#188ff5);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:15px}
+  .rShare h3{margin:0 0 4px;font-size:19px}.rShare p{margin:0;font-size:11px;opacity:.88}.rShare button{border:0;background:#ffd83d;color:#1550a0;border-radius:20px;padding:10px 18px;font-weight:900;cursor:pointer}
+  .rFoot{padding:24px 5%;text-align:center;font-size:10px;color:#9aaabd}
 }
-
-@media (max-width: 430px){
-  .hero::before{
-    aspect-ratio:1536/1150;
-    background-size:cover;
-    background-position:top center;
-  }
-  .hero .t1,.hero .t2{top:31.5%!important}
-  .hero .t3,.hero .t4{top:44.5%!important}
-  .hero .t5,.hero .t6{top:57.5%!important}
-  .hero .t7,.hero .t8{top:70.5%!important}
-  .hero .t9,.hero .t10{top:83.5%!important}
-  .hero .t11,.hero .t12{top:96.5%!important}
-  .drawer{height:86vh}
-  .qrTitle{font-size:19px}
-  .qrSub{font-size:11px}
+@media (max-width:767px){
+  .rHero{min-height:205px;padding:22px 18px 28px}
+  .rBrand{font-size:16px}.rBrand span{font-size:10px}
+  .rTitle{margin-top:26px;font-size:31px}.rSub{font-size:12px}
+  .rSection{width:calc(100% - 24px);margin-top:-18px}
+  .rPanel{padding:13px;border-radius:17px}.rPanelTitle{font-size:17px;margin-bottom:12px}
+  .rPanelTitle:before{width:30px;height:30px}
+  .rTools{grid-template-columns:repeat(2,1fr);gap:9px}
+  .rTool{min-height:116px;padding:12px}.rIcon{width:36px;height:36px;margin-bottom:8px}.rName{font-size:13px}.rDesc{font-size:9px}
+  .rService{display:block;padding:16px}.rService h3{font-size:18px}.rContact{margin-top:13px;width:100%}
+  .rShare{display:block}.rShare button{margin-top:12px;width:100%}
+  .drawer{width:100vw;border-radius:18px 18px 0 0;top:auto;bottom:0;height:min(86vh,720px);transform:translateY(102%);padding:20px}
+  .drawer.show{transform:translateY(0)}
+  .drawerMask{background:rgba(8,39,82,.3)}
+  .qrModal{width:min(340px,calc(100vw - 28px));padding:22px 18px 18px}
+  .qrBox{width:min(260px,72vw);height:min(260px,72vw)}
+}
+@media (min-width:768px) and (max-width:1100px){
+  .rTools{grid-template-columns:repeat(3,1fr)}
+  .rHero{min-height:250px}
 }
 
 </style>
 </head>
 <body>
+
+<div class="responsiveApp">
+  <section class="rHero">
+    <div class="rBrand">Z ZENMESUAN <span>简单实用的健康生活工具</span></div>
+    <div class="rTitle">把健康数据，<em>算清楚</em></div>
+    <div class="rSub">体重、血压、血糖、血脂、热量、饮水、运动……<br>简单输入，马上得到参考结果。</div>
+  </section>
+  <section class="rSection">
+    <div class="rPanel">
+      <div class="rPanelTitle">常用健康工具</div>
+      <div class="rTools">
+        <button class="rTool responsive-tool" data-tool="BMI计算器"><div class="rIcon">BMI</div><div class="rName">BMI计算器</div><div class="rDesc">评估体重是否健康</div></button>
+        <button class="rTool responsive-tool" data-tool="标准体重计算器"><div class="rIcon">体重</div><div class="rName">标准体重计算器</div><div class="rDesc">计算适合的体重范围</div></button>
+        <button class="rTool responsive-tool" data-tool="体脂率计算器"><div class="rIcon">体脂</div><div class="rName">体脂率计算器</div><div class="rDesc">了解身体脂肪比例</div></button>
+        <button class="rTool responsive-tool" data-tool="血压平均值"><div class="rIcon">心压</div><div class="rName">血压平均值</div><div class="rDesc">多次测量，计算平均值</div></button>
+        <button class="rTool responsive-tool" data-tool="血糖单位换算"><div class="rIcon">血糖</div><div class="rName">血糖单位换算</div><div class="rDesc">mmol/L 与 mg/dL</div></button>
+        <button class="rTool responsive-tool" data-tool="每日热量计算"><div class="rIcon">热量</div><div class="rName">每日热量计算</div><div class="rDesc">科学控制饮食</div></button>
+        <button class="rTool responsive-tool" data-tool="每日饮水量"><div class="rIcon">饮水</div><div class="rName">每日饮水量</div><div class="rDesc">保持身体水分平衡</div></button>
+        <button class="rTool responsive-tool" data-tool="腰高比计算器"><div class="rIcon">腰高</div><div class="rName">腰高比计算器</div><div class="rDesc">评估腹部脂肪风险</div></button>
+        <button class="rTool responsive-tool" data-tool="脉压计算器"><div class="rIcon">脉压</div><div class="rName">脉压计算器</div><div class="rDesc">了解心血管健康状况</div></button>
+        <button class="rTool responsive-tool" data-tool="血脂结果整理"><div class="rIcon">血脂</div><div class="rName">血脂结果整理</div><div class="rDesc">看懂体检报告数据</div></button>
+        <button class="rTool responsive-tool" data-tool="步数计算器"><div class="rIcon">步数</div><div class="rName">步数计算器</div><div class="rDesc">计算距离和运动消耗</div></button>
+        <button class="rTool responsive-tool" data-tool="体检指标查询"><div class="rIcon">指标</div><div class="rName">体检指标查询</div><div class="rDesc">轻松读懂体检报告</div></button>
+      </div>
+      <div class="rService">
+        <div><h3>老照片翻新 · 海报制作</h3><p>照片修改、老照片翻新、海报、直播间贴片、淘宝主图设计</p></div>
+        <button class="rContact" id="rContact">添加微信咨询</button>
+      </div>
+      <div class="rShare">
+        <div><h3>让健康更有价值</h3><p>算完结果，可以直接分享给家人朋友。</p></div>
+        <button id="rShareBtn">分享最近一次结果</button>
+      </div>
+    </div>
+  </section>
+  <div class="rFoot">健康计算结果仅供日常参考，不替代专业医疗建议</div>
+</div>
+
 <div class="page">
   <div class="hero">
     <button class="hot t1" data-tool="BMI计算器" aria-label="BMI计算器"></button>
@@ -345,16 +305,12 @@ wechatHot.onclick=openQR;
 hero.appendChild(wechatHot);
 
 
-/* 手机端：点击工具后自动滚到抽屉，关闭后回到当前浏览位置 */
-if (window.matchMedia('(max-width: 768px)').matches) {
-  document.querySelectorAll('.hot').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      setTimeout(function(){
-        document.getElementById('drawer').scrollTop = 0;
-      }, 20);
-    });
-  });
-}
+/* 响应式三屏版本的工具入口，共用同一套抽屉与计算逻辑 */
+document.querySelectorAll('.responsive-tool').forEach(el=>el.addEventListener('click',()=>openTool(el.dataset.tool)));
+document.getElementById('rContact').addEventListener('click',openQR);
+document.getElementById('rShareBtn').addEventListener('click',()=>{
+  if(lastResult){shareResult()}else{alert('请先打开任意工具并计算一次结果。')}
+});
 
 </script>
 </body>
