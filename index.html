@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
+<!-- 百度搜索资源平台验证：上线后将平台生成的真实 meta 验证标签放在这里，不要填写虚假 token。 -->
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ZENMESUAN｜健康生活小工具</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BMI计算器｜标准体重、血压、血糖、热量、饮水量计算器｜怎么算</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;background:#fff;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;color:#123b7a}
@@ -74,6 +75,24 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
 
 /* ===== 三屏自适应布局 ===== */
 .responsiveApp{display:none}
+
+/* 工具结果统一视觉：大结果 + 简短解释 + 重新计算 + 相关工具 */
+.resultBox{margin-top:16px;padding:16px;border:1px solid #dcecf8;border-radius:16px;background:linear-gradient(180deg,#f8fcff,#f0f8ff);display:none;overflow:hidden}
+.resultBox.show{display:block;animation:resultIn .22s ease}
+@keyframes resultIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.resultTitle{font-size:13px;font-weight:700;color:#6d86a0;margin-bottom:6px}
+.resultMain{font-size:30px;line-height:1.18;font-weight:900;letter-spacing:.2px;color:#0878e8;margin:2px 0 8px;word-break:break-word}
+.resultSub{font-size:12px;line-height:1.7;color:#667f99}
+.resultActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.resultActions button{border:0;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer}
+.resultReset{background:#e9f4ff;color:#0878e8}
+.resultRelated{margin-top:14px;padding-top:12px;border-top:1px dashed #d9e6f1}
+.relatedLabel{font-size:11px;color:#8aa0b5;margin-bottom:7px}
+.relatedList{display:flex;gap:7px;flex-wrap:wrap}
+.relatedBtn{border:1px solid #d7e8f7;background:#fff;color:#315f8f;border-radius:999px;padding:7px 10px;font-size:11px;cursor:pointer}
+.resultNote{margin-top:10px;font-size:10px;line-height:1.6;color:#98a8b8}.resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.resultMetric{background:#fff;border:1px solid #dfeaf4;border-radius:11px;padding:10px}.resultMetric b{display:block;font-size:16px;color:#0b74df;margin-top:3px}.resultMetric span{font-size:10px;color:#8095aa}.resultGood{color:#159447!important}.resultWarn{color:#d77a19!important}.resultBad{color:#d65353!important}@media(max-width:767px){.resultGrid{gap:7px}.resultMetric{padding:9px}}
+@media(max-width:767px){.resultMain{font-size:27px}.resultBox{padding:14px}.relatedBtn{padding:7px 9px}}
+
 @media (max-width:1100px){
   html,body{overflow-x:hidden}
   .page{display:none}
@@ -181,6 +200,42 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
 }
 
 </style>
+<meta name="description" content="怎么算提供免费的健康计算工具：BMI、标准体重、体脂率、血压平均值、血糖换算、每日热量、饮水量、腰高比、脉压、血脂、步数和体检指标。简单输入，快速得到结果。">
+<meta name="keywords" content="BMI计算器,标准体重计算器,血压平均值,血糖换算,每日热量,每日饮水量,腰高比,脉压,血脂计算,步数计算器,体检指标,健康计算器">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:title" content="怎么算｜健康生活小工具">
+<meta property="og:description" content="简单、快速、好用的健康生活计算工具集合。">
+<meta property="og:site_name" content="怎么算">
+<link rel="canonical" href="https://zenmesuan.cn/">
+<style>
+.seoIntro,.seoFaq{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:normal;border:0}
+</style>
+
+<style>
+.toolGuide{width:100%;padding:34px 4% 46px;background:#f7fbff;border-top:1px solid #e7f0f7}
+.toolGuideInner{max-width:1180px;margin:0 auto}
+.toolGuide h2{margin:0 0 7px;text-align:center;font-size:24px;color:#123d7f}
+.toolGuideLead{margin:0 auto 22px;max-width:720px;text-align:center;font-size:13px;line-height:1.8;color:#7288a1}
+.toolGuideGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.toolGuideGrid article{background:#fff;border:1px solid #e5edf4;border-radius:12px;padding:14px 15px}
+.toolGuideGrid h3{margin:0 0 7px;font-size:14px;color:#174e92}
+.toolGuideGrid p{margin:0;font-size:11px;line-height:1.7;color:#72869b}
+@media(max-width:1100px){.toolGuideGrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:767px){.toolGuide{padding:26px 14px 34px}.toolGuide h2{font-size:20px}.toolGuideGrid{grid-template-columns:repeat(2,1fr);gap:9px}.toolGuideGrid article{padding:11px}.toolGuideGrid h3{font-size:13px}.toolGuideGrid p{font-size:10px}}
+</style>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://zenmesuan.cn/#website", "name": "怎么算", "url": "https://zenmesuan.cn/", "description": "健康生活计算工具集合"}, {"@type": "ItemList", "name": "健康生活计算器", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "BMI计算器"}, {"@type": "ListItem", "position": 2, "name": "标准体重计算器"}, {"@type": "ListItem", "position": 3, "name": "体脂率计算器"}, {"@type": "ListItem", "position": 4, "name": "血压平均值计算器"}, {"@type": "ListItem", "position": 5, "name": "血糖单位换算"}, {"@type": "ListItem", "position": 6, "name": "每日热量计算器"}, {"@type": "ListItem", "position": 7, "name": "每日饮水量计算器"}, {"@type": "ListItem", "position": 8, "name": "腰高比计算器"}, {"@type": "ListItem", "position": 9, "name": "脉压计算器"}, {"@type": "ListItem", "position": 10, "name": "血脂结果整理"}, {"@type": "ListItem", "position": 11, "name": "步数计算器"}, {"@type": "ListItem", "position": 12, "name": "体检指标查询"}]}]}</script>
+<meta name="applicable-device" content="pc,mobile">
+<meta name="mobile-agent" content="format=html5; url=https://zenmesuan.cn/">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0d4e91">
+<style>
+.siteTrustNote{width:100%;padding:10px 16px;background:#f8fbfe;border-top:1px solid #edf3f8}
+.siteTrustInner{max-width:1180px;margin:0 auto;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;font-size:11px;color:#7b8ea3;line-height:1.6}
+.siteTrustInner strong{color:#55718d}
+@media(max-width:767px){.siteTrustInner{font-size:10px;text-align:center}}
+</style>
 </head>
 <body>
 
@@ -194,18 +249,18 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
     <div class="rPanel">
       <div class="rPanelTitle">常用健康工具</div>
       <div class="rTools">
-        <button class="rTool responsive-tool" data-tool="BMI计算器"><div class="rIcon">BMI</div><div class="rName">BMI计算器</div><div class="rDesc">评估体重是否健康</div></button>
-        <button class="rTool responsive-tool" data-tool="标准体重计算器"><div class="rIcon">体重</div><div class="rName">标准体重计算器</div><div class="rDesc">计算适合的体重范围</div></button>
-        <button class="rTool responsive-tool" data-tool="体脂率计算器"><div class="rIcon">体脂</div><div class="rName">体脂率计算器</div><div class="rDesc">了解身体脂肪比例</div></button>
-        <button class="rTool responsive-tool" data-tool="血压平均值"><div class="rIcon">心压</div><div class="rName">血压平均值</div><div class="rDesc">多次测量，计算平均值</div></button>
-        <button class="rTool responsive-tool" data-tool="血糖单位换算"><div class="rIcon">血糖</div><div class="rName">血糖单位换算</div><div class="rDesc">mmol/L 与 mg/dL</div></button>
-        <button class="rTool responsive-tool" data-tool="每日热量计算"><div class="rIcon">热量</div><div class="rName">每日热量计算</div><div class="rDesc">科学控制饮食</div></button>
-        <button class="rTool responsive-tool" data-tool="每日饮水量"><div class="rIcon">饮水</div><div class="rName">每日饮水量</div><div class="rDesc">保持身体水分平衡</div></button>
-        <button class="rTool responsive-tool" data-tool="腰高比计算器"><div class="rIcon">腰高</div><div class="rName">腰高比计算器</div><div class="rDesc">评估腹部脂肪风险</div></button>
-        <button class="rTool responsive-tool" data-tool="脉压计算器"><div class="rIcon">脉压</div><div class="rName">脉压计算器</div><div class="rDesc">了解心血管健康状况</div></button>
-        <button class="rTool responsive-tool" data-tool="血脂结果整理"><div class="rIcon">血脂</div><div class="rName">血脂结果整理</div><div class="rDesc">看懂体检报告数据</div></button>
-        <button class="rTool responsive-tool" data-tool="步数计算器"><div class="rIcon">步数</div><div class="rName">步数计算器</div><div class="rDesc">计算距离和运动消耗</div></button>
-        <button class="rTool responsive-tool" data-tool="体检指标查询"><div class="rIcon">指标</div><div class="rName">体检指标查询</div><div class="rDesc">轻松读懂体检报告</div></button>
+        <button class="rTool responsive-tool" data-tool="BMI计算器" aria-label="计算 BMI"><div class="rIcon">BMI</div><div class="rName">BMI计算器</div><div class="rDesc">评估体重是否健康</div></button>
+        <button class="rTool responsive-tool" data-tool="标准体重计算器" aria-label="计算标准体重"><div class="rIcon">体重</div><div class="rName">标准体重计算器</div><div class="rDesc">计算适合的体重范围</div></button>
+        <button class="rTool responsive-tool" data-tool="体脂率计算器" aria-label="计算体脂率"><div class="rIcon">体脂</div><div class="rName">体脂率计算器</div><div class="rDesc">了解身体脂肪比例</div></button>
+        <button class="rTool responsive-tool" data-tool="血压平均值" aria-label="计算血压平均值"><div class="rIcon">心压</div><div class="rName">血压平均值</div><div class="rDesc">多次测量，计算平均值</div></button>
+        <button class="rTool responsive-tool" data-tool="血糖单位换算" aria-label="进行血糖单位换算"><div class="rIcon">血糖</div><div class="rName">血糖单位换算</div><div class="rDesc">mmol/L 与 mg/dL</div></button>
+        <button class="rTool responsive-tool" data-tool="每日热量计算" aria-label="计算每日热量"><div class="rIcon">热量</div><div class="rName">每日热量计算</div><div class="rDesc">科学控制饮食</div></button>
+        <button class="rTool responsive-tool" data-tool="每日饮水量" aria-label="计算每日饮水量"><div class="rIcon">饮水</div><div class="rName">每日饮水量</div><div class="rDesc">保持身体水分平衡</div></button>
+        <button class="rTool responsive-tool" data-tool="腰高比计算器" aria-label="计算腰高比"><div class="rIcon">腰高</div><div class="rName">腰高比计算器</div><div class="rDesc">评估腹部脂肪风险</div></button>
+        <button class="rTool responsive-tool" data-tool="脉压计算器" aria-label="计算脉压"><div class="rIcon">脉压</div><div class="rName">脉压计算器</div><div class="rDesc">了解心血管健康状况</div></button>
+        <button class="rTool responsive-tool" data-tool="血脂结果整理" aria-label="整理血脂结果"><div class="rIcon">血脂</div><div class="rName">血脂结果整理</div><div class="rDesc">看懂体检报告数据</div></button>
+        <button class="rTool responsive-tool" data-tool="步数计算器" aria-label="计算步数距离和消耗"><div class="rIcon">步数</div><div class="rName">步数计算器</div><div class="rDesc">计算距离和运动消耗</div></button>
+        <button class="rTool responsive-tool" data-tool="体检指标查询" aria-label="查询体检指标参考"><div class="rIcon">指标</div><div class="rName">体检指标查询</div><div class="rDesc">轻松读懂体检报告</div></button>
       </div>
 
       <!-- 手机端专用：按确认的效果图改为上下垂直、居中对称的设计服务展示。
@@ -225,7 +280,10 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
   <div class="rFoot">健康计算结果仅供日常参考，不替代专业医疗建议</div>
 </div>
 
-<div class="page">
+<div class="page"><section class="seoIntro" aria-label="健康生活计算工具说明">
+<h1>健康生活计算器</h1>
+<p>怎么算提供简单易用的健康生活小工具，帮助你快速计算 BMI、标准体重、血压平均值、血糖单位、每日热量、饮水量、腰高比、脉压、血脂和步数等常见数据。</p>
+</section>
   <div class="hero">
     <button class="hot t1" data-tool="BMI计算器" aria-label="BMI计算器"></button>
     <button class="hot t2" data-tool="标准体重计算器"></button>
@@ -239,7 +297,7 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
     <button class="hot t10" data-tool="血脂结果整理"></button>
     <button class="hot t11" data-tool="步数计算器"></button>
     <button class="hot t12" data-tool="体检指标查询"></button>
-    <button class="designHot" data-tool="设计服务" aria-label="设计服务"></button>
+    <button class="designHot" data-tool="设计服务" aria-label="老照片翻新、海报制作、直播间贴片、淘宝主图设计服务"> aria-label="设计服务"></button>
     <button class="shareHot" id="shareHot" aria-label="分享真实计算结果"></button>
     <div class="livePhone"><div class="liveScreen" id="liveScreen">
       <div class="small" id="liveName">我的BMI</div>
@@ -301,26 +359,45 @@ document.querySelectorAll('.hot,.designHot').forEach(el=>el.addEventListener('cl
 document.getElementById('close').onclick=closeTool; mask.onclick=closeTool;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTool()});
 
-function showResult(main,sub='',name='健康计算结果'){
- const r=document.getElementById('r'); r.classList.add('show'); r.innerHTML=`<div class="resultTitle">${name}</div><div class="resultMain">${main}</div><div class="resultSub">${sub}</div><button class="shareBtn" onclick="shareResult()">分享这个结果</button>`;
- lastResult={name,main,sub}; updatePhone();
+const relatedMap={
+ 'BMI计算器':['标准体重计算器','体脂率计算器','腰高比计算器'],
+ '标准体重计算器':['BMI计算器','体脂率计算器','每日热量计算'],
+ '体脂率计算器':['BMI计算器','标准体重计算器','腰高比计算器'],
+ '血压平均值':['脉压计算器','体检指标查询','血脂结果整理'],
+ '血糖单位换算':['体检指标查询','每日热量计算','每日饮水量'],
+ '每日热量计算':['BMI计算器','每日饮水量','步数计算器'],
+ '每日饮水量':['BMI计算器','每日热量计算','步数计算器'],
+ '腰高比计算器':['BMI计算器','标准体重计算器','体脂率计算器'],
+ '脉压计算器':['血压平均值','体检指标查询','血脂结果整理'],
+ '血脂结果整理':['体检指标查询','血压平均值','脉压计算器'],
+ '步数计算器':['每日热量计算','BMI计算器','每日饮水量'],
+ '体检指标查询':['血压平均值','血脂结果整理','BMI计算器']
+};
+function escapeHtml(v){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function showResult(main,sub='',name='健康计算结果',metrics=''){
+ const r=document.getElementById('r');
+ const rel=(relatedMap[name]||[]).map(n=>`<button class="relatedBtn" onclick="openTool('${n}')">${n}</button>`).join('');
+ r.classList.add('show');
+ r.innerHTML=`<div class="resultTitle">${escapeHtml(name)}</div><div class="resultMain">${main}</div>${metrics}<div class="resultSub">${sub}</div><div class="resultActions"><button class="resultReset" onclick="resetResult()">重新计算</button><button class="shareBtn" onclick="shareResult()">分享这个结果</button></div><div class="resultRelated"><div class="relatedLabel">还可以看看</div><div class="relatedList">${rel}</div></div><div class="resultNote">健康工具仅用于日常参考，不替代医生诊断；如结果持续异常，请结合规范测量并咨询专业人员。</div>`;
+ lastResult={name,main:String(main).replace(/<[^>]+>/g,''),sub}; updatePhone();
 }
 function showError(msg,name='请检查输入'){
- const r=document.getElementById('r'); r.classList.add('show'); r.innerHTML=`<div class="resultTitle">${name}</div><div class="resultMain" style="font-size:17px;color:#d85b42">${msg}</div><div class="resultSub">请修改输入后再试。</div>`;
+ const r=document.getElementById('r'); r.classList.add('show'); r.innerHTML=`<div class="resultTitle">${escapeHtml(name)}</div><div class="resultMain" style="font-size:17px;color:#d85b42">${escapeHtml(msg)}</div><div class="resultSub">请修改输入后再试。</div><div class="resultActions"><button class="resultReset" onclick="resetResult()">重新输入</button></div>`;
 }
+function resetResult(){const r=document.getElementById('r');r.classList.remove('show');r.innerHTML='';const first=form.querySelector('input,select');if(first){first.focus();if(first.tagName==='INPUT'&&first.type==='number')first.select()}}
 function num(id){return parseFloat(document.getElementById(id).value)}
 function requireRange(id,min,max,label){const v=num(id);if(!Number.isFinite(v)||v<min||v>max){showError(`${label}应为 ${min}～${max}`);return null}return v}
-function calcBMI(){let h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重');if(h===null||w===null)return;let v=w/Math.pow(h/100,2),tag=v<18.5?'体重过低':v<24?'正常':v<28?'超重':'肥胖';showResult(v.toFixed(1),`中国成人常用分类：${tag}`,'我的BMI')}
+function calcBMI(){let h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重');if(h===null||w===null)return;let v=w/Math.pow(h/100,2),tag=v<18.5?'体重过低':v<24?'正常':v<28?'超重':'肥胖';showResult(v.toFixed(1),`中国成人分类：${tag}（18岁及以上参考）`,'我的BMI')}
 function calcStd(){let h=requireRange('h',100,250,'身高');if(h===null)return;let m=h/100,lo=18.5*m*m,hi=23.9*m*m;showResult(lo.toFixed(1)+'～'+hi.toFixed(1)+' kg','按 BMI 18.5～23.9 计算的体重参考范围','标准体重')}
 function calcBF(){let h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重'),a=requireRange('a',18,100,'年龄');if([h,w,a].includes(null))return;let bmi=w/Math.pow(h/100,2),sex=+document.getElementById('s').value,v=1.2*bmi+.23*a-10.8*sex-5.4;showResult(Math.max(2,Math.min(60,v)).toFixed(1)+'%','基于 BMI、年龄和性别的简易估算，不等同于专业体脂检测','体脂率')}
-function calcBP(){let raw=document.getElementById('v').value.trim();let a=raw.split(/[,，;；\s]+/).map(x=>x.match(/^(\d+(?:\.\d+)?)\s*[\/／]\s*(\d+(?:\.\d+)?)$/)).filter(Boolean);if(!a.length)return showError('请输入如 135/82, 138/84 的格式','血压格式');for(const m of a){let s=+m[1],d=+m[2];if(s<60||s>250||d<30||d>150||s<=d)return showError('请检查血压数值：收缩压应高于舒张压','血压数据');}let s=a.reduce((q,m)=>q+ +m[1],0)/a.length,d=a.reduce((q,m)=>q+ +m[2],0)/a.length;showResult(s.toFixed(1)+' / '+d.toFixed(1)+' mmHg','共计算 '+a.length+' 次测量；平均值用于观察趋势，不用于单次诊断','血压平均值')}
+function calcBP(){let raw=document.getElementById('v').value.trim();let a=raw.split(/[,，;；\s]+/).map(x=>x.match(/^(\d+(?:\.\d+)?)\s*[\/／]\s*(\d+(?:\.\d+)?)$/)).filter(Boolean);if(!a.length)return showError('请输入如 135/82, 138/84 的格式','血压格式');for(const m of a){let ss=+m[1],dd=+m[2];if(ss<60||ss>250||dd<30||dd>150||ss<=dd)return showError('请检查血压数值：收缩压应高于舒张压','血压数据')}let ss=a.reduce((q,m)=>q+ +m[1],0)/a.length,dd=a.reduce((q,m)=>q+ +m[2],0)/a.length;let status=(ss>=135||dd>=85)?'需要关注':'参考范围内';let cls=status==='需要关注'?'resultWarn':'resultGood';let metrics=`<div class="resultGrid"><div class="resultMetric"><span>收缩压平均值</span><b>${ss.toFixed(1)} mmHg</b></div><div class="resultMetric"><span>舒张压平均值</span><b>${dd.toFixed(1)} mmHg</b></div><div class="resultMetric"><span>测量次数</span><b>${a.length} 次</b></div><div class="resultMetric"><span>家庭血压提示</span><b class="${cls}">${status}</b></div></div>`;showResult(ss.toFixed(1)+' / '+dd.toFixed(1)+' mmHg','家庭血压平均值达到或超过 135/85 mmHg 时，建议规范测量并结合连续记录咨询专业人员。','血压平均值',metrics)}
 function calcGlucose(){let v=requireRange('v',0,1000,'数值');if(v===null)return;let m=document.getElementById('u').value==='m',out=m?v*18.0182:v/18.0182;showResult(out.toFixed(2)+' '+(m?'mg/dL':'mmol/L'),'换算系数按 1 mmol/L ≈ 18.0182 mg/dL','血糖换算')}
-function calcCal(){let a=requireRange('a',18,100,'年龄'),h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重');if([a,h,w].includes(null))return;let b=document.getElementById('s').value==='m'?10*w+6.25*h-5*a+5:10*w+6.25*h-5*a-161, factor=+document.getElementById('act').value,tdee=b*factor;showResult(Math.round(tdee)+' kcal/天',`基础代谢约 ${Math.round(b)} kcal/天；活动水平会影响实际需求`,'每日热量')}
+function calcCal(){let a=requireRange('a',18,100,'年龄'),h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重');if([a,h,w].includes(null))return;let b=document.getElementById('s').value==='m'?10*w+6.25*h-5*a+5:10*w+6.25*h-5*a-161,factor=+document.getElementById('act').value,tdee=b*factor;let metrics=`<div class="resultGrid"><div class="resultMetric"><span>基础代谢</span><b>${Math.round(b)} kcal</b></div><div class="resultMetric"><span>每日总消耗参考</span><b>${Math.round(tdee)} kcal</b></div></div>`;showResult(Math.round(tdee)+' kcal/天','按所选活动水平估算的每日总能量需求，不等同于减重目标热量。','每日热量',metrics)}
 function calcWater(){let w=requireRange('w',20,300,'体重');if(w===null)return;showResult(Math.round(w*30)+'～'+Math.round(w*35)+' ml/天','按 30～35 ml/kg 做日常粗略估算；炎热、运动及疾病状态需单独考虑','每日饮水量')}
 function calcWH(){let h=requireRange('h',100,250,'身高'),w=requireRange('w',40,180,'腰围');if(h===null||w===null)return;let v=w/h,tag=v<0.5?'低于 0.5':'达到或超过 0.5';showResult(v.toFixed(2),`腰围 ÷ 身高；当前筛查值${tag}`,'腰高比')}
 function calcPulse(){let s=requireRange('s',60,250,'收缩压'),d=requireRange('d',30,150,'舒张压');if(s===null||d===null)return;if(s<=d)return showError('收缩压必须高于舒张压','血压数据');showResult((s-d)+' mmHg','收缩压－舒张压','脉压')}
-function calcLipid(){let ids=[['tc','总胆固醇 TC'],['tg','甘油三酯 TG'],['ldl','LDL-C'],['hdl','HDL-C']],vals={};for(const [id,label] of ids){let v=num(id);if(!Number.isFinite(v)||v<0)return showError(`请输入${label}`,'血脂数据');vals[id]=v}let rows=[`TC：${vals.tc.toFixed(2)} mmol/L — ${vals.tc>=5.2?'偏高':'未达到常见异常界值'}`,`TG：${vals.tg.toFixed(2)} mmol/L — ${vals.tg>=1.7?'偏高':'未达到常见异常界值'}`,`LDL-C：${vals.ldl.toFixed(2)} mmol/L — ${vals.ldl>=3.4?'偏高':'未达到常见异常界值'}`,`HDL-C：${vals.hdl.toFixed(2)} mmol/L — ${vals.hdl<1.0?'偏低':'未达到常见异常界值'}`];showResult('已整理',rows.join('<br>'),'血脂结果')}
-function calcSteps(){let st=requireRange('steps',0,100000,'步数'),h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重');if([st,h,w].includes(null))return;let sex=document.getElementById('s').value, stride=h*(sex==='m'?0.413:0.415),km=st*stride/100000, kcal=km*w*0.5;showResult(km.toFixed(2)+' km',`粗略消耗约 ${Math.round(kcal)} kcal；步幅、速度和地形都会影响实际值`,'步数计算')}
+function calcLipid(){let ids=[['tc','总胆固醇 TC'],['tg','甘油三酯 TG'],['ldl','LDL-C'],['hdl','HDL-C']],vals={};for(const [id,label] of ids){let v=num(id);if(!Number.isFinite(v)||v<0)return showError(`请输入${label}`,'血脂数据');vals[id]=v}let items=[['TC',vals.tc,vals.tc>=5.2?'resultWarn':'resultGood'],['TG',vals.tg,vals.tg>=1.7?'resultWarn':'resultGood'],['LDL-C',vals.ldl,vals.ldl>=3.4?'resultWarn':'resultGood'],['HDL-C',vals.hdl,vals.hdl<1.0?'resultWarn':'resultGood']];let metrics='<div class="resultGrid">'+items.map(x=>`<div class="resultMetric"><span>${x[0]}</span><b class="${x[2]}">${x[1].toFixed(2)} mmol/L</b></div>`).join('')+'</div>';showResult('已整理','这些是常见筛查界值提示；LDL-C 等治疗目标需要结合个人心血管风险判断。','血脂结果',metrics)}
+function calcSteps(){let st=requireRange('steps',0,100000,'步数'),h=requireRange('h',100,250,'身高'),w=requireRange('w',20,300,'体重');if([st,h,w].includes(null))return;let sex=document.getElementById('s').value,stride=h*(sex==='m'?0.413:0.415),km=st*stride/100000,kcal=km*w*0.5;let metrics=`<div class="resultGrid"><div class="resultMetric"><span>步数</span><b>${Math.round(st)} 步</b></div><div class="resultMetric"><span>步行距离</span><b>${km.toFixed(2)} km</b></div><div class="resultMetric"><span>粗略消耗</span><b>${Math.round(kcal)} kcal</b></div><div class="resultMetric"><span>说明</span><b>仅供参考</b></div></div>`;showResult(km.toFixed(2)+' km','实际消耗会受步幅、速度、地形和运动强度影响。','步数计算',metrics)}
 function calcCheck(){let k=document.getElementById('k').value,v=num('val');if(!Number.isFinite(v))return showError('请输入检查结果','指标查询');const map={bmi:['BMI',v<18.5?'体重过低':v<24?'正常':v<28?'超重':'肥胖','成人常用中国分类'],sbp:['收缩压',v<120?'低于 120':v<140?'120～139':'≥140 mmHg','需结合舒张压及多次测量综合判断'],dbp:['舒张压',v<80?'低于 80':v<90?'80～89':'≥90 mmHg','需结合收缩压及多次测量综合判断'],glucose:['空腹血糖',v<6.1?'低于 6.1':v<7.0?'6.1～6.9':'≥7.0 mmol/L','仅作日常参考，诊断需结合专业标准'],tc:['总胆固醇 TC',v>=5.2?'≥5.2 mmol/L':'<5.2 mmol/L','常见血脂异常筛查界值'],tg:['甘油三酯 TG',v>=1.7?'≥1.7 mmol/L':'<1.7 mmol/L','常见血脂异常筛查界值'],ldl:['LDL-C',v>=3.4?'≥3.4 mmol/L':'<3.4 mmol/L','治疗目标需按个人心血管风险确定'],hdl:['HDL-C',v<1.0?'<1.0 mmol/L':'≥1.0 mmol/L','过低可能提示风险，需要结合整体情况']};let x=map[k];showResult(x[1],x[2],x[0])}
 
 function updatePhone(){
@@ -396,5 +473,40 @@ if(mobileWechat) mobileWechat.addEventListener('click',openQR);
 rDesignService.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openQR()}});
 
 </script>
+<section class="seoFaq" aria-label="常见问题">
+<h2>健康计算器常见问题</h2>
+<details><summary>BMI 怎么算？</summary><p>BMI 等于体重（kg）除以身高（m）的平方，适合做日常参考。</p></details>
+<details><summary>血压可以算平均值吗？</summary><p>可以把同一时段的多次测量值整理后计算平均值；日常判断应结合多次测量。</p></details>
+<details><summary>血糖 mmol/L 怎么换算成 mg/dL？</summary><p>mmol/L × 18 约等于 mg/dL，反向换算则除以 18。</p></details>
+<details><summary>每天喝多少水？</summary><p>饮水量会受到体重、活动量、天气和饮食等因素影响，工具结果仅作日常参考。</p></details>
+</section>
+
+<section class="toolGuide" aria-labelledby="toolGuideTitle">
+  <div class="toolGuideInner">
+    <h2 id="toolGuideTitle">常用健康计算器</h2>
+    <p class="toolGuideLead">输入几个简单数据，就能快速得到日常健康管理中的常见计算结果。结果仅供参考，不代替医生诊断。</p>
+    <div class="toolGuideGrid">
+      <article><h3>BMI计算器</h3><p>输入身高和体重，计算身体质量指数 BMI，并查看成人体重分类参考。</p></article>
+      <article><h3>标准体重计算器</h3><p>根据身高计算成人体重参考区间，适合快速了解自己的体重范围。</p></article>
+      <article><h3>体脂率计算器</h3><p>结合身高、体重、年龄和性别，对体脂率进行简易估算。</p></article>
+      <article><h3>血压平均值计算器</h3><p>输入多次血压测量值，自动计算收缩压和舒张压平均值。</p></article>
+      <article><h3>血糖单位换算</h3><p>快速完成 mmol/L 与 mg/dL 两种常见血糖单位之间的换算。</p></article>
+      <article><h3>每日热量计算器</h3><p>根据年龄、身高、体重和活动水平，估算基础代谢与每日能量需求。</p></article>
+      <article><h3>每日饮水量计算器</h3><p>根据体重估算日常饮水量参考范围，方便安排每天喝水。</p></article>
+      <article><h3>腰高比计算器</h3><p>用腰围除以身高，快速得到腰高比，作为体型管理的日常参考。</p></article>
+      <article><h3>脉压计算器</h3><p>用收缩压减去舒张压，快速计算脉压。</p></article>
+      <article><h3>血脂结果整理</h3><p>整理总胆固醇、甘油三酯、LDL-C 和 HDL-C 等常见血脂数据。</p></article>
+      <article><h3>步数计算器</h3><p>输入步数、身高和体重，估算步行距离与运动消耗。</p></article>
+      <article><h3>体检指标查询</h3><p>查看常见体检指标的用途和日常参考信息，帮助理解体检数据。</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="siteTrustNote" aria-label="网站说明">
+  <div class="siteTrustInner">
+    <strong>健康计算仅供日常参考</strong>
+    <span>计算结果不能替代医生诊断、检查或治疗建议。</span>
+  </div>
+</section>
 </body>
 </html>
