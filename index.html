@@ -338,7 +338,15 @@ async function shareResult(){
 document.getElementById('shareHot').addEventListener('click',shareResult);
 
 const qrMask=document.getElementById('qrMask'), qrModal=document.getElementById('qrModal');
-function openQR(){qrMask.classList.add('show');qrModal.classList.add('show')}
+function openQR(){
+  /* 电脑/平板点击设计服务时，只显示二维码，不保留抽屉 */
+  const drawer=document.querySelector('.drawer');
+  const drawerMask=document.querySelector('.drawerMask');
+  if(drawer) drawer.classList.remove('show');
+  if(drawerMask) drawerMask.classList.remove('show');
+  qrMask.classList.add('show');
+  qrModal.classList.add('show');
+}
 function closeQR(){qrMask.classList.remove('show');qrModal.classList.remove('show')}
 qrMask.addEventListener('click',closeQR);
 document.getElementById('qrClose').addEventListener('click',closeQR);
@@ -372,7 +380,17 @@ rDesignService.addEventListener('click',openQR);
 
 const mobileConsult=document.querySelector('.mobileDesignHotConsult');
 const mobileWechat=document.querySelector('.mobileDesignHotWechat');
+const mobileDesignVisual=document.querySelector('.mobileDesignVisual');
 if(mobileConsult) mobileConsult.addEventListener('click',openQR);
+if(mobileWechat) mobileWechat.addEventListener('click',openQR);
+/* 手机端：整个设计服务展示区域均可点击，方便用户直接打开二维码 */
+if(mobileDesignVisual){
+  mobileDesignVisual.style.cursor='pointer';
+  mobileDesignVisual.setAttribute('role','button');
+  mobileDesignVisual.setAttribute('tabindex','0');
+  mobileDesignVisual.addEventListener('click',openQR);
+  mobileDesignVisual.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openQR()}});
+}
 if(mobileWechat) mobileWechat.addEventListener('click',openQR);
 
 rDesignService.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openQR()}});
