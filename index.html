@@ -70,7 +70,139 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
 .qrWechat{display:inline-block;padding:7px 16px;border-radius:20px;background:#edf8f1;color:#159447;font-size:13px;font-weight:800}
 .qrHint{font-size:10px;color:#9aaabc;margin-top:12px}
 
-@media(max-width:1000px){.page{width:1000px}}
+
+/* ==================== 手机端适配 ==================== */
+@media (max-width: 768px){
+  html,body{
+    width:100%;
+    min-width:0;
+    overflow-x:hidden;
+    background:#f5f9fd;
+  }
+  .page{
+    width:100%;
+    min-width:0;
+    margin:0;
+  }
+  .hero{
+    width:100%;
+    min-width:0;
+    aspect-ratio:auto;
+    height:auto;
+    background:none;
+    padding-top:0;
+    overflow:hidden;
+  }
+
+  /* 手机端把原设计图拆成可响应的首页结构 */
+  .hero::before{
+    content:"";
+    display:block;
+    width:100%;
+    aspect-ratio:1536/1024;
+    background-image:inherit;
+    background-size:cover;
+    background-position:top center;
+  }
+
+  /* 工具热区改成真正的 2 列手机卡片布局 */
+  .hot{
+    position:relative;
+    left:auto!important;
+    top:auto!important;
+    width:auto!important;
+    height:0!important;
+    margin:0;
+    background:transparent;
+    outline:none!important;
+  }
+
+  /* 覆盖层：在手机端使用独立的透明网格承载点击 */
+  .hero{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-auto-rows:0;
+    gap:0;
+  }
+  .hero::before{
+    grid-column:1/-1;
+    grid-row:1;
+  }
+
+  /* 手机端工具按钮仍精确落在原图对应区域，但使用绝对定位 */
+  .hero .hot{
+    position:absolute!important;
+    height:auto!important;
+    aspect-ratio:1.75/1;
+    z-index:6;
+  }
+  .hero .t1{left:4%!important;top:35.0%!important;width:43%!important}
+  .hero .t2{left:53%!important;top:35.0%!important;width:43%!important}
+  .hero .t3{left:4%!important;top:49.5%!important;width:43%!important}
+  .hero .t4{left:53%!important;top:49.5%!important;width:43%!important}
+  .hero .t5{left:4%!important;top:64.0%!important;width:43%!important}
+  .hero .t6{left:53%!important;top:64.0%!important;width:43%!important}
+  .hero .t7{left:4%!important;top:78.5%!important;width:43%!important}
+  .hero .t8{left:53%!important;top:78.5%!important;width:43%!important}
+  .hero .t9{left:4%!important;top:93.0%!important;width:43%!important}
+  .hero .t10{left:53%!important;top:93.0%!important;width:43%!important}
+  .hero .t11{left:4%!important;top:107.5%!important;width:43%!important}
+  .hero .t12{left:53%!important;top:107.5%!important;width:43%!important}
+
+  /* 移动端不再把超出图片高度的热区截断，使用滚动页面承载工具 */
+  .designHot,.shareHot,.livePhone,
+  .hero > button[aria-label="立即咨询"],
+  .hero > button[aria-label="微信同号"]{
+    display:none!important;
+  }
+
+  /* 手机上右侧宣传栏不适合横向挤压，抽屉功能保留 */
+  .drawer{
+    width:100%;
+    max-width:none;
+    padding:22px 18px 28px;
+    border-radius:20px 20px 0 0;
+    top:auto;
+    bottom:0;
+    height:min(82vh,680px);
+    transform:translateY(105%);
+    box-shadow:0 -14px 45px rgba(13,56,105,.22);
+  }
+  .drawer.show{transform:translateY(0)}
+  .drawer h2{font-size:20px}
+  .drawer .desc{font-size:12px}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  input,select,.calcBtn{height:46px;font-size:15px}
+  .resultMain{font-size:24px}
+
+  /* 二维码弹窗 */
+  .qrModal{
+    width:min(340px,calc(100vw - 28px));
+    padding:24px 18px 20px;
+  }
+  .qrBox{
+    width:min(260px,76vw);
+    height:min(260px,76vw);
+  }
+}
+
+@media (max-width: 430px){
+  .hero::before{
+    aspect-ratio:1536/1150;
+    background-size:cover;
+    background-position:top center;
+  }
+  .hero .t1,.hero .t2{top:31.5%!important}
+  .hero .t3,.hero .t4{top:44.5%!important}
+  .hero .t5,.hero .t6{top:57.5%!important}
+  .hero .t7,.hero .t8{top:70.5%!important}
+  .hero .t9,.hero .t10{top:83.5%!important}
+  .hero .t11,.hero .t12{top:96.5%!important}
+  .drawer{height:86vh}
+  .qrTitle{font-size:19px}
+  .qrSub{font-size:11px}
+}
+
 </style>
 </head>
 <body>
@@ -211,6 +343,18 @@ wechatHot.setAttribute('aria-label','微信同号');
 wechatHot.style.cssText='position:absolute;z-index:7;left:24.2%;top:88.0%;width:9.5%;height:4.8%;border:0;background:transparent;cursor:pointer;border-radius:18px';
 wechatHot.onclick=openQR;
 hero.appendChild(wechatHot);
+
+
+/* 手机端：点击工具后自动滚到抽屉，关闭后回到当前浏览位置 */
+if (window.matchMedia('(max-width: 768px)').matches) {
+  document.querySelectorAll('.hot').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setTimeout(function(){
+        document.getElementById('drawer').scrollTop = 0;
+      }, 20);
+    });
+  });
+}
 
 </script>
 </body>
