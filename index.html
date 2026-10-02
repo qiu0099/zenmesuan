@@ -2,11 +2,21 @@
 <html lang="zh-CN">
 <!-- 百度搜索资源平台验证：上线后将平台生成的真实 meta 验证标签放在这里，不要填写虚假 token。 -->
 <head>
-<meta name="baidu-site-verification" content="codeva-68M8JrHutY" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 百度统计：异步统计代码 -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c766f57b2964655c66ed64568cc51e2f";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 <title>BMI计算器｜标准体重、血压、血糖、热量、饮水量计算器｜怎么算</title>
 <style>
+.jsNotice{padding:8px 12px;text-align:center;background:#fff7e6;color:#8a5a00;font-size:12px;border-bottom:1px solid #f2dfb2}
 *{box-sizing:border-box}
 html,body{margin:0;background:#fff;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;color:#123b7a}
 body{overflow-x:auto}
@@ -239,6 +249,7 @@ input,select{width:100%;height:44px;border:1px solid #d9e5ef;border-radius:11px;
 </style>
 </head>
 <body>
+<noscript class="jsNotice">本网站的计算工具需要开启浏览器 JavaScript 才能正常使用。</noscript>
 
 <div class="responsiveApp">
   <section class="rHero">
@@ -336,6 +347,11 @@ const drawer=document.getElementById('drawer'), mask=document.getElementById('ma
 const title=document.getElementById('title'), desc=document.getElementById('desc');
 let lastResult=null;
 
+// 百度统计事件：记录工具打开、计算完成、结果分享和设计服务咨询。
+function trackEvent(action,label){
+  try{if(window._hmt){_hmt.push(['_trackEvent','健康工具',action,String(label||'')]);}}catch(e){}
+}
+
 const tools={
 "BMI计算器":{d:"输入身高和体重，计算成人 BMI，并按中国成人常用体重分类给出参考。",f:`<div class="grid"><div class="field"><label>身高（cm）</label><input id="h" type="number" min="100" max="250" step="0.1" value="170"></div><div class="field"><label>体重（kg）</label><input id="w" type="number" min="20" max="300" step="0.1" value="70"></div></div><button class="calcBtn" onclick="calcBMI()">立即计算</button><div class="resultBox" id="r"></div>`},
 "标准体重计算器":{d:"按中国成人常用 BMI 18.5～23.9 计算体重参考范围。",f:`<div class="field"><label>身高（cm）</label><input id="h" type="number" min="100" max="250" step="0.1" value="170"></div><button class="calcBtn" onclick="calcStd()">立即计算</button><div class="resultBox" id="r"></div>`},
@@ -352,8 +368,10 @@ const tools={
 "设计服务":{d:"照片修改、老照片翻新、海报设计、直播间贴片、淘宝主图等。",f:`<div style="line-height:2;color:#476784;font-size:14px">老照片翻新<br>海报制作<br>直播间贴片<br>淘宝主图设计</div><div class="resultBox show"><div class="resultMain" style="font-size:16px">扫码添加微信咨询</div></div>`}
 };
 function openTool(name){
- const x=tools[name]; title.textContent=name; desc.textContent=x.d; form.innerHTML=x.f;
+ const x=tools[name]; if(!x)return;
+ title.textContent=name; desc.textContent=x.d; form.innerHTML=x.f;
  drawer.classList.add('show'); mask.classList.add('show');
+ trackEvent('打开工具',name);
 }
 function closeTool(){drawer.classList.remove('show');mask.classList.remove('show')}
 document.querySelectorAll('.hot,.designHot').forEach(el=>el.addEventListener('click',()=>openTool(el.dataset.tool)));
@@ -380,7 +398,7 @@ function showResult(main,sub='',name='健康计算结果',metrics=''){
  const rel=(relatedMap[name]||[]).map(n=>`<button class="relatedBtn" onclick="openTool('${n}')">${n}</button>`).join('');
  r.classList.add('show');
  r.innerHTML=`<div class="resultTitle">${escapeHtml(name)}</div><div class="resultMain">${main}</div>${metrics}<div class="resultSub">${sub}</div><div class="resultActions"><button class="resultReset" onclick="resetResult()">重新计算</button><button class="shareBtn" onclick="shareResult()">分享这个结果</button></div><div class="resultRelated"><div class="relatedLabel">还可以看看</div><div class="relatedList">${rel}</div></div><div class="resultNote">健康工具仅用于日常参考，不替代医生诊断；如结果持续异常，请结合规范测量并咨询专业人员。</div>`;
- lastResult={name,main:String(main).replace(/<[^>]+>/g,''),sub}; updatePhone();
+ lastResult={name,main:String(main).replace(/<[^>]+>/g,''),sub}; updatePhone(); trackEvent('完成计算',name);
 }
 function showError(msg,name='请检查输入'){
  const r=document.getElementById('r'); r.classList.add('show'); r.innerHTML=`<div class="resultTitle">${escapeHtml(name)}</div><div class="resultMain" style="font-size:17px;color:#d85b42">${escapeHtml(msg)}</div><div class="resultSub">请修改输入后再试。</div><div class="resultActions"><button class="resultReset" onclick="resetResult()">重新输入</button></div>`;
@@ -411,7 +429,10 @@ function updatePhone(){
 async function shareResult(){
  if(!lastResult)return;
  const text=`ZENMESUAN 健康计算：${lastResult.name} ${lastResult.main}。${lastResult.sub}`;
- try{if(navigator.share){await navigator.share({title:lastResult.name,text})}else{await navigator.clipboard.writeText(text);alert('结果已复制，可以发给家人朋友。')}}catch(e){}
+ try{
+   if(navigator.share){await navigator.share({title:lastResult.name,text});trackEvent('分享结果',lastResult.name)}
+   else{await navigator.clipboard.writeText(text);trackEvent('复制结果',lastResult.name);alert('结果已复制，可以发给家人朋友。')}
+ }catch(e){}
 }
 document.getElementById('shareHot').addEventListener('click',shareResult);
 
@@ -424,6 +445,7 @@ function openQR(){
   if(drawerMask) drawerMask.classList.remove('show');
   qrMask.classList.add('show');
   qrModal.classList.add('show');
+  trackEvent('微信咨询','设计服务');
 }
 function closeQR(){qrMask.classList.remove('show');qrModal.classList.remove('show')}
 qrMask.addEventListener('click',closeQR);
